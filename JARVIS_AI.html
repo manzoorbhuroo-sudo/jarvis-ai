@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JARVIS AI</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#02070d;color:#dffcff;font-family:Arial,Helvetica,sans-serif}
+body{overflow-x:hidden;background:radial-gradient(circle at 48% 43%,#06273a 0,transparent 30%),#02070d}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background:linear-gradient(90deg,transparent 49.8%,#16d9ff 50%,transparent 50.2%),linear-gradient(transparent 49.8%,#16d9ff 50%,transparent 50.2%);background-size:80px 80px}
+header{height:70px;border:1px solid #07566c;border-radius:0 0 16px 16px;display:flex;align-items:center;padding:0 24px;background:#02080ee8;box-shadow:0 0 30px #00cfff12;position:relative;z-index:2}
+.logo{font-size:25px;letter-spacing:8px;color:#5deaff;font-weight:500}.headerTitle{margin-left:30px;color:#71909b;font-size:13px;letter-spacing:2px}.clockTop{position:absolute;left:50%;transform:translateX(-50%);text-align:center;border:1px solid #07566c;border-radius:18px;padding:8px 42px;background:#020910}.clockTop b{font-size:21px}.clockTop small{display:block;color:#8aa8b2}.headerRight{margin-left:auto;display:flex;gap:22px;color:#55dcff;font-size:20px}.online{color:#43ff91;font-size:11px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:230px minmax(420px,1fr) 390px;gap:18px;max-width:1550px;margin:16px auto;padding:0 14px}.panel{border:1px solid #07566c;background:linear-gradient(180deg,#03111bdd,#02080edb);border-radius:10px;box-shadow:inset 0 0 30px #00cfff08,0 0 25px #00cfff08}
+.side{padding:0;overflow:hidden}.navTitle{padding:18px 20px;font-size:11px;color:#52e8ff;letter-spacing:2px}.side button{width:100%;border:0;border-top:1px solid #063748;padding:15px 20px;text-align:left;background:transparent;color:#d5faff;font-size:13px;cursor:pointer}.side button:hover{background:#073044}.side button.active{border-left:3px solid #18dcff;background:linear-gradient(90deg,#063044,#04131d)}.modules{border-top:1px solid #07566c;margin-top:12px;padding:17px 20px}.module{padding:13px 0;border-bottom:1px solid #063748;font-size:12px}.module span{display:block;color:#789ba6;margin-top:5px}.green{color:#43ff91}.main{padding:18px;min-height:820px;position:relative}.welcome h2{margin:0;color:#52e8ff;font-size:17px}.welcome p{margin:8px 0;color:#a1bdc6;font-size:13px}.coreArea{height:610px;display:flex;flex-direction:column;align-items:center;justify-content:center}.orb{width:420px;height:420px;border-radius:50%;position:relative;display:grid;place-items:center}.orb:before,.orb:after{content:"";position:absolute;border-radius:50%;inset:8px;border:2px solid #08cfff55;box-shadow:0 0 25px #00d9ff22}.orb:after{inset:45px;border:1px solid #0fd9ff88}.rings{position:absolute;inset:-5px;border-radius:50%;border:2px dashed #13cfff66;animation:spin 18s linear infinite}.rings2{position:absolute;inset:35px;border-radius:50%;border:5px solid transparent;border-top-color:#1edfff;border-bottom-color:#0aa8ff;animation:spin 7s linear infinite reverse}.rings3{position:absolute;inset:75px;border-radius:50%;border:2px solid #0acfff88;border-left-color:transparent;animation:spin 4s linear infinite}.orbCore{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#3fe9ff 0,#08698e 18%,#03283e 55%,#02070d 72%);box-shadow:0 0 35px #00d9ff,0 0 90px #00d9ff55;z-index:2;animation:pulse 2s ease-in-out infinite}.orbCore span{font-size:25px;letter-spacing:7px;color:#e7ffff;text-shadow:0 0 18px #00d9ff}.wave{width:65%;height:45px;margin-top:-8px;background:repeating-linear-gradient(90deg,transparent 0 5px,#0ad9ff 6px 8px,transparent 9px 13px);mask-image:linear-gradient(90deg,transparent,#fff 10%,#fff 90%,transparent);animation:wave 1s linear infinite}.listen{font-size:12px;letter-spacing:3px;color:#74eaff;margin-top:8px}.listen.active{color:#43ff91;text-shadow:0 0 12px #43ff91}.quick{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.quick button{border:1px solid #07566c;background:#03131e;color:#60eaff;padding:12px 6px;border-radius:7px;cursor:pointer;font-size:10px}.quick button:hover{background:#073044}.right{display:flex;flex-direction:column;gap:14px}.card{padding:16px}.card h3{margin:0 0 14px;color:#52e8ff;font-size:12px;letter-spacing:2px}.assistant{min-height:175px}.assistantText{display:flex;gap:15px;align-items:center}.miniOrb{width:55px;height:55px;border-radius:50%;background:radial-gradient(circle,#fff,#00d9ff 18%,#052c42 60%);box-shadow:0 0 25px #00d9ff}.weather{min-height:260px}.weatherMain{display:flex;justify-content:space-between;align-items:center}.temp{font-size:38px}.weatherGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;text-align:center;margin-top:25px}.systemGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.meter{height:85px;border:6px solid #073449;border-top-color:#19dfff;border-radius:50%;display:grid;place-items:center;font-size:17px}.notes li{margin:10px 0;color:#b2c9d0}.command{grid-column:2/3;display:flex;border:1px solid #10a9cc;border-radius:10px;background:#020a10}.command input{flex:1;background:transparent;border:0;outline:0;padding:17px;color:#fff;font-size:15px}.command button{width:60px;border:0;background:transparent;color:#43ddff;font-size:22px;cursor:pointer}.micButton{width:55px!important;border-right:1px solid #07566c!important}.hacker{color:#72ff9c;font-family:monospace;font-size:12px;line-height:1.7;max-height:220px;overflow:auto}.chat{position:fixed;right:20px;bottom:90px;width:380px;max-height:360px;z-index:8;display:none}.chat.show{display:block}.messages{max-height:250px;overflow:auto;padding:12px}.msg{padding:9px 11px;margin:7px 0;border-radius:8px;font-size:12px}.jarvis{background:#06283a;border-left:3px solid #38ddff}.user{background:#102a24;border-right:3px solid #43ff9d;text-align:right}@keyframes spin{to{transform:rotate(360deg)}}@keyframes pulse{50%{transform:scale(1.06);box-shadow:0 0 55px #00d9ff,0 0 110px #00d9ff77}}@keyframes wave{to{background-position:28px 0}}
+@media(max-width:1100px){.grid{grid-template-columns:1fr}.side{display:none}.right{display:grid;grid-template-columns:1fr 1fr}.coreArea{height:500px}.chat{width:calc(100% - 30px);right:15px}.command{grid-column:1/-1}}@media(max-width:650px){.right{display:block}.orb{width:300px;height:300px}.orbCore{width:140px;height:140px}.quick{grid-template-columns:repeat(2,1fr)}.clockTop{display:none}}
+.quickTool{border:1px solid #07566c;background:#04131e;color:#63eaff;padding:9px 12px;border-radius:7px;cursor:pointer;font-size:11px}.toolBox{border:1px solid #07566c;border-radius:9px;padding:14px;background:#020c13;margin-bottom:12px}.toolBox textarea,.toolBox input{width:100%;background:#01070c;color:#dffcff;border:1px solid #07566c;border-radius:7px;padding:10px;margin:6px 0}.toolBox button{background:#062033;color:#62eaff;border:1px solid #08718e;border-radius:7px;padding:10px 13px;cursor:pointer}.terminal{background:#000805;color:#6dff9a;font-family:monospace;min-height:230px;padding:13px;white-space:pre-wrap;overflow:auto}.mission{padding:12px;border-left:3px solid #43ff91;background:#031510;margin:8px 0}.mapBox{height:470px;border:1px solid #07566c;position:relative;background:#07131a;overflow:hidden}.mapGrid{position:absolute;inset:0;background-image:linear-gradient(#1a536633 1px,transparent 1px),linear-gradient(90deg,#1a536633 1px,transparent 1px);background-size:45px 45px}.mapPin{position:absolute;left:50%;top:50%;font-size:28px}</style>
+
+<style id="jv185PC">
+/* JARVIS v18.5 — LAPTOP / PC MODE */
+@media(max-width:700px){
+  body:before{content:"JARVIS PC MODE";position:fixed;inset:0;z-index:999999;
+    display:flex;align-items:center;justify-content:center;background:#02070c;
+    color:#57eaff;font:18px Consolas;letter-spacing:3px}
+  body>*{visibility:hidden!important}
+  body:before{visibility:visible!important}
+}
+</style>
+
+</head>
+<body>
+<div id="v14Dashboard" style="position:fixed;left:18px;top:75px;z-index:24;display:none;max-width:min(700px,calc(100vw - 36px));padding:10px;background:#020b12dd;border:1px solid #07566c;border-radius:10px">
+  <div style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
+    <button class="v10btn" onclick="v14Chat()">💬 CHAT</button>
+    <button class="v10btn" onclick="v10Profile()">👤 PROFILE</button>
+    <button class="v10btn" onclick="v10Calculator()">🧮 CALCULATOR</button>
+    <button class="v10btn" onclick="v10Weather()">🌦 WEATHER</button>
+    <button class="v10btn" onclick="v10Search()">🌐 INTERNET</button>
+    <button class="v10btn" onclick="openToolV7?.('map')">🗺 MAP</button>
+    <button class="v10btn" onclick="v14DateTime()">🕒 DATE/TIME</button>
+    <button class="v10btn" onclick="v14Fullscreen()">⛶ FULL SCREEN</button>
+  </div>
+</div>
+<div id="v14Info" style="position:fixed;right:18px;top:75px;z-index:24;display:none;width:min(300px,calc(100vw - 36px));padding:12px;background:#020b12dd;border:1px solid #07566c;border-radius:10px;color:#a9d4dd;font:11px Consolas,monospace">
+  <div style="color:#52e8ff;margin-bottom:8px">JARVIS DAILY ASSISTANT</div>
+  <div id="v14InfoText">Ready.</div>
+</div>
+
+<div id="startupV10" style="position:fixed;inset:0;z-index:1000;background:#02070d;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="width:min(520px,95vw);border:1px solid #0ad9ff;background:#020b12;box-shadow:0 0 70px #00d9ff22;padding:30px;border-radius:12px">
+    <div style="text-align:center;color:#5deaff;font-size:31px;letter-spacing:9px">J A R V I S</div>
+    <div style="text-align:center;color:#71909b;font-size:11px;letter-spacing:2px;margin:8px 0 25px">PERSONAL AI SYSTEM • SECURE STARTUP</div>
+    <input id="v10Name" placeholder="YOUR NAME" style="width:100%;padding:13px;margin:6px 0;background:#01070c;color:#fff;border:1px solid #07566c;border-radius:7px">
+    <input id="v10Password" type="password" placeholder="JARVIS PASSWORD" style="width:100%;padding:13px;margin:6px 0;background:#01070c;color:#fff;border:1px solid #07566c;border-radius:7px">
+    <div id="v10SetupHint" style="font-size:10px;color:#587984;margin:5px 0 15px">First launch: create your local JARVIS password.</div>
+    <button onclick="v10Start()" style="width:100%;padding:13px;background:#03202b;color:#5deaff;border:1px solid #0aa4c4;border-radius:7px;cursor:pointer">START JARVIS</button>
+    <div id="v10Error" style="text-align:center;color:#ff7070;font-size:11px;margin-top:10px"></div>
+  </div>
+</div>
+
+<header>
+  <div class="logo">J A R V I S</div><div class="headerTitle">AI ASSISTANT</div>
+  <div class="clockTop"><b id="topTime">10:30 AM</b><small id="topDate">10 May 2025</small></div>
+  <div class="headerRight"><span>🎙</span><span>✎</span><span>⚙</span><span>—</span><span>□</span><span>×</span></div>
+</header>
+<div class="grid">
+  <aside class="panel side">
+    <div class="navTitle">NAVIGATION</div>
+    <button class="active">⌂ &nbsp; DASHBOARD</button><button>▣ &nbsp; SYSTEM</button><button>▱ &nbsp; FILES</button><button onclick="v10Calculator()">◉ &nbsp; CALCULATOR</button><button onclick="v10Search()">◎ &nbsp; WEB SEARCH</button><button onclick="v10Weather()">⌁ &nbsp; REAL WEATHER</button><button>⚙ &nbsp; SETTINGS</button>
+    <div class="modules"><div class="navTitle" style="padding:0 0 8px">ACTIVE MODULES</div>
+      <div class="module">♬ &nbsp; VOICE RECOGNITION <b class="green">●</b><span id="voiceState">Ready</span></div>
+      <div class="module">⌁ &nbsp; NETWORK <b class="green">●</b><span>Secure</span></div>
+      <div class="module">▤ &nbsp; DATABASE <b class="green">●</b><span>Connected</span></div>
+      <div class="module">▣ &nbsp; SYSTEM STATUS <b class="green">●</b><span>Optimal</span></div>
+    </div>
+    <div class="navTitle">PERSONAL</div><button onclick="sayAndRun('what is my name')">👤 &nbsp; MY PROFILE</button><button onclick="testJarvisVoice()">🔊 &nbsp; TEST JARVIS VOICE</button><button onclick="v10Profile()">👤 &nbsp; PROFILE</button><button onclick="showChatV11()">💬 &nbsp; CHAT</button><div class="navTitle">PRANK</div><button onclick="geekPrank()">☠ &nbsp; GEEK PRANK MODE</button>
+  </aside>
+
+  <main class="panel main">
+    <div class="welcome"><h2>WELCOME BACK, SIR</h2><p>How can I help you today?</p></div>
+    <div class="coreArea">
+      <div class="orb"><div class="rings"></div><div class="rings2"></div><div class="rings3"></div><div class="orbCore"><span>JARVIS</span></div></div>
+      <div class="wave"></div><div id="listen" class="listen">LISTENING...</div>
+    </div>
+    <div class="quick">
+      <button onclick="openChat()">▦<br>OPEN CHAT</button><button onclick="sayAndRun('system status')">⌁<br>SYSTEM STATUS</button><button onclick="sayAndRun('activate geek prank')">›_<br>CYBER / PRANK</button><button onclick="sayAndRun('take notes')">✎<br>TAKE NOTES</button><button onclick="sayAndRun('search web')">⌕<br>SEARCH WEB</button>
+    </div>
+    <div class="command"><button class="micButton" onclick="startListening()">🎙</button><input id="input" placeholder="Give me a command..." onkeydown="if(event.key==='Enter')send()"><button onclick="send()">➤</button></div>
+  </main>
+
+  <aside class="right">
+    <section class="panel card assistant"><h3>JARVIS AI ASSISTANT</h3><div class="assistantText"><div class="miniOrb"></div><div>Ready to assist you.<br><br>You can ask me anything.</div></div></section>
+    <section class="panel card weather"><h3>WEATHER</h3><div class="small" id="weatherLocation">Your location</div><div class="weatherMain"><div><span style="font-size:42px">☼</span> <span id="weather" class="temp">--°C</span><div id="weatherDesc">Loading...</div></div><div class="small">Humidity: --<br><br>Wind: --<br><br>Feels like: --</div></div><div class="weatherGrid"><span>☼<br><small>SAT</small></span><span>☼<br><small>SUN</small></span><span>☼<br><small>MON</small></span><span>☁<br><small>TUE</small></span><span>☼<br><small>WED</small></span></div></section>
+    <section class="panel card"><h3>SYSTEM OVERVIEW</h3><div class="systemGrid"><div class="meter">23%<small>CPU</small></div><div class="meter">48%<small>RAM</small></div><div class="meter">36%<small>DISK</small></div></div><div style="text-align:center;color:#43ff91;font-size:11px;margin-top:12px">SYSTEM STATUS: OPTIMAL</div></section>
+    <section class="panel card">
+  <h3>USER PROFILE</h3>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="miniOrb" style="width:45px;height:45px"></div>
+    <div><div style="font-size:16px" id="profileName">Arhaan</div>
+    <div class="small">JARVIS knows you</div></div>
+  </div>
+  <div class="small" style="margin-top:12px">Say: “Jarvis, what is my name?”</div>
+</section>
+<section class="panel card notes"><h3>QUICK NOTES ＋</h3><ul><li>Project meeting at 2 PM</li><li>Review code for AI module</li><li>Buy groceries</li><li>Call Mr. Khan</li></ul><div style="color:#50dfff;font-size:12px">View all notes...</div></section>
+  </aside>
+</div>
+<div id="chat" class="panel chat"><h3 style="padding:12px 12px 0;color:#52e8ff">JARVIS CONVERSATION</h3><div id="messages" class="messages"><div class="msg jarvis">Good day, Arhaan. I am JARVIS. How may I assist you?</div></div><div id="hackerLog" class="hacker" style="display:none"></div></div>
+<div id="prankOverlay" style="display:none;position:fixed;inset:0;background:#020509f5;z-index:20;align-items:center;justify-content:center;text-align:center;padding:20px">
+  <div style="width:min(720px,95vw);border:1px solid #43ff9d;border-radius:14px;padding:28px;background:#020c08;box-shadow:0 0 60px #43ff9d33">
+    <div style="font:700 34px monospace;color:#43ff9d;letter-spacing:5px">GEEK MODE</div><div id="prankTitle" style="font:700 24px monospace;color:#fff;margin:20px 0 8px">SYSTEM ACCESS</div><div id="prankText" style="font:14px monospace;color:#9effbd;min-height:90px;line-height:1.8"></div>
+    <div id="cracker" style="display:none;margin:18px auto;text-align:left;font-family:monospace;border:1px solid #245;border-radius:8px;padding:12px;background:#010805">
+      <div style="color:#43ff91">FAKE PASSWORD CRACKER • SIMULATION</div>
+      <div id="crackerTarget" style="color:#b9d8c2;margin-top:8px">TARGET: DEMO_ACCOUNT</div>
+      <div style="height:8px;background:#092015;margin:10px 0;border-radius:5px;overflow:hidden"><div id="crackerBar" style="height:100%;width:0;background:#43ff91;transition:width .2s"></div></div>
+      <div id="crackerStatus" style="color:#9effbd">Generating simulated attempts...</div>
+      <div id="crackerAttempt" style="color:#75ff9b;margin-top:6px">Attempt: ----</div>
+    </div>
+    <button onclick="closePrank()" style="padding:12px 24px;border:1px solid #43ff9d;border-radius:8px;background:#062116;color:#43ff9d;cursor:pointer">EXIT PRANK</button>
+  </div>
+</div>
+
+<div id="v10Modal" style="display:none;position:fixed;inset:0;background:#01050bef;z-index:40;padding:5vh 4vw;overflow:auto">
+  <div class="panel" style="max-width:900px;margin:auto;padding:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2 id="v10Title" style="color:#52e8ff;margin:0">JARVIS TOOL</h2>
+      <button onclick="v10Close()">✕ CLOSE</button>
+    </div>
+    <div id="v10Content" style="margin-top:18px"></div>
+  </div>
+</div>
+<style>
+.v10btn{background:#03131e;color:#60eaff;border:1px solid #07566c;border-radius:7px;padding:11px 14px;cursor:pointer}
+.v10input{background:#01070c;color:#fff;border:1px solid #07566c;border-radius:7px;padding:12px}
+.v10term{background:#000805;color:#70ff9c;padding:15px;min-height:250px;white-space:pre-wrap;font:12px/1.6 Consolas,monospace;border-radius:8px}
+</style>
+<div id="toolDock" class="panel" style="display:none;position:fixed;left:18px;bottom:18px;width:min(560px,calc(100vw - 36px));z-index:7;padding:12px;background:#020910f5"><div style="display:flex;gap:8px;flex-wrap:wrap">
+<button class="quickTool" onclick="openTool('cyber')">🛡 CYBER LAB</button><button class="quickTool" onclick="openTool('code')">⌨ AUTO CODE</button><button class="quickTool" onclick="openTool('mission')">🎯 MISSIONS</button><button class="quickTool" onclick="openTool('map')">🗺 MAP</button><button class="quickTool" onclick="openTool('file')">📄 REAL FILE</button></div></div>
+<div id="toolModal" style="display:none;position:fixed;inset:0;background:#01050bef;z-index:30;padding:5vh 4vw;overflow:auto"><div class="panel" style="max-width:1100px;margin:auto;padding:20px"><div style="display:flex;justify-content:space-between"><h2 id="toolTitle" style="color:#52e8ff">JARVIS TOOL</h2><button onclick="closeTool()">✕ CLOSE</button></div><div id="toolContent"></div></div></div><footer style="text-align:center;color:#557f8b;font-size:10px;padding:8px">JARVIS AI Assistant • Version 1.0.0 • <span class="online">● SYSTEM ONLINE</span></footer>
+<script>
+let locationName="Unknown", weatherData=null, recognition=null, micStream=null;
+
+function addMessage(text,type="jarvis"){
+ const box=document.getElementById("messages");
+ if(!box)return;
+ const d=document.createElement("div"); d.className="msg "+type; d.textContent=text;
+ box.appendChild(d); box.scrollTop=box.scrollHeight;
+}
+let jarvisVoice=null;
+function loadJarvisVoice(){
+ if(!("speechSynthesis" in window)) return;
+ const voices=speechSynthesis.getVoices();
+ if(!voices.length)return;
+ const preferredNames=["Microsoft David","Microsoft Mark","Google UK English Male","Google US English Male","Daniel","Alex","Fred","Arthur","Guy"];
+ jarvisVoice=voices.find(v=>preferredNames.some(n=>v.name.toLowerCase().includes(n.toLowerCase())))
+   || voices.find(v=>/male|david|mark|daniel|alex|fred|guy/i.test(v.name))
+   || voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith("en-in"))
+   || voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith("en"));
+}
+if("speechSynthesis" in window){
+ speechSynthesis.onvoiceschanged=loadJarvisVoice;
+ setTimeout(loadJarvisVoice,300);
+}
+function speak(text){
+ if(!("speechSynthesis" in window)) return;
+ loadJarvisVoice();
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.voice=jarvisVoice||null;
+ u.lang=jarvisVoice?.lang||"en-IN";
+ u.rate=.88;
+ u.pitch=.72;
+ u.volume=1;
+ speechSynthesis.speak(u);
+}
+function sayAndRun(t){openChat();addMessage(t,"user");respond(t)}
+function openChat(){document.getElementById("chat").classList.toggle("show")}
+function send(){
+ const el=document.getElementById("input"); const t=el.value.trim();
+ if(!t)return; el.value=""; openChat(); addMessage(t,"user"); respond(t);
+}
+const JARVIS_MEMORY = {
+  name: "Arhaan",
+  assistantName: "JARVIS"
+};
+function getUserName(){ return JARVIS_MEMORY.name; }
+
+function respond(text){
+ const t=text.toLowerCase().replace(/[.,!?]/g,""); let r="";
+ if(t.includes("weather")){r=weatherData?`The weather is ${weatherData.temp} degrees Celsius with ${weatherData.desc}.`:"I am retrieving the weather now, Sir.";getWeather()}
+ else if(t.includes("time")) r=`The current time is ${new Date().toLocaleTimeString("en-IN")}.`;
+ else if(t.includes("date")||t.includes("day")) r=`Today is ${new Date().toLocaleDateString("en-IN",{weekday:"long",year:"numeric",month:"long",day:"numeric"})}.`;
+ else if(t.includes("location")||t.includes("where am i")) r=`Your detected location is ${locationName}.`;
+ else if(t.includes("geek")||t.includes("prank")||t.includes("hacker")||t.includes("hack")){geekPrank();return}
+ else if(t.includes("stop")||t.includes("exit prank")){closePrank();r="Prank mode stopped, Sir."}
+ else if(t.includes("system status")) r="All JARVIS dashboard modules are online. Voice recognition is ready.";
+ else if(t.includes("hello")||t.includes("hi")) r="Hello, Sir. JARVIS is online and ready.";
+ else if(t.includes("what is my name")||t.includes("whats my name")||t.includes("who am i")||t.includes("do you know my name")) r="Your name is Arhaan, Sir. I remember your name for this JARVIS interface.";
+ else if(t.includes("who are you")) r="I am JARVIS, your personal browser-based AI assistant.";
+ else r=`I heard: "${text}". The local JARVIS interface is working.`;
+ addMessage(r); speak(r);
+}
+
+/* Reliable microphone flow:
+   1. Request microphone permission with getUserMedia.
+   2. Start SpeechRecognition directly from the button click.
+   3. Give a useful message for file://, permission, no-speech and network errors.
+*/
+async function startListening(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ const listen=document.getElementById("listen");
+ const state=document.getElementById("voiceState");
+
+ if(!SR){
+   openChat();
+   addMessage("Chrome's Speech Recognition is not available in this browser. Please use the latest Google Chrome on Windows.");
+   speak("Speech recognition is not available in this browser.");
+   return;
+ }
+
+ // Speech recognition is much more reliable from localhost/https than a downloaded file.
+ if(location.protocol==="file:"){
+   openChat();
+   addMessage("MIC SETUP: You opened JARVIS as a file. Chrome can block microphone recognition from file pages. Please run JARVIS through localhost; I can provide the one-click launcher.");
+   speak("Sir, microphone access is blocked when I am opened directly as a file. Run me through localhost.");
+   return;
+ }
+
+ try{
+   if(micStream){micStream.getTracks().forEach(t=>t.stop());micStream=null;}
+   micStream=await navigator.mediaDevices.getUserMedia({audio:true});
+ }catch(err){
+   openChat();
+   let msg="Microphone permission is required.";
+   if(err.name==="NotAllowedError") msg="Microphone permission was denied. In Chrome, click the lock icon beside the address and set Microphone to Allow, then reload JARVIS.";
+   else if(err.name==="NotFoundError") msg="No microphone was found. Check that your microphone is connected and enabled.";
+   else if(err.name==="NotReadableError") msg="The microphone is busy in another application. Close other apps using the mic and try again.";
+   addMessage(msg); speak(msg); return;
+ }
+
+ if(recognition){try{recognition.abort()}catch(e){}}
+ recognition=new SR();
+ recognition.lang="en-IN";
+ recognition.interimResults=true;
+ recognition.continuous=false;
+ recognition.maxAlternatives=3;
+
+ listen.textContent="LISTENING — SPEAK NOW";
+ listen.classList.add("active");
+ if(state)state.textContent="Listening — microphone active";
+
+ recognition.onstart=()=>{
+   listen.textContent="LISTENING — SPEAK NOW";
+   listen.classList.add("active");
+   if(state)state.textContent="Listening — speak now";
+ };
+
+ recognition.onresult=e=>{
+   let transcript="";
+   for(let i=e.resultIndex;i<e.results.length;i++) transcript+=e.results[i][0].transcript;
+   const finalResult=e.results[e.results.length-1].isFinal;
+   document.getElementById("input").value=transcript;
+   if(finalResult){
+     openChat();
+     addMessage(transcript.trim(),"user");
+     respond(transcript.trim());
+   }
+ };
+
+ recognition.onerror=e=>{
+   let msg;
+   switch(e.error){
+    case "not-allowed": msg="Chrome blocked the microphone. Allow Microphone for this JARVIS site and reload."; break;
+    case "no-speech": msg="I did not hear you, Sir. Speak clearly and try again."; break;
+    case "audio-capture": msg="Chrome cannot access the microphone. Check Windows microphone permissions and your input device."; break;
+    case "network": msg="Chrome's speech service could not be reached. Check your internet connection."; break;
+    case "aborted": return;
+    default: msg="Voice recognition error: "+e.error;
+   }
+   openChat(); addMessage(msg); speak(msg);
+ };
+
+ recognition.onend=()=>{
+   listen.textContent="LISTENING...";
+   listen.classList.remove("active");
+   if(state)state.textContent="Ready";
+   if(micStream){micStream.getTracks().forEach(t=>t.stop());micStream=null;}
+ };
+
+ try{recognition.start();}
+ catch(err){openChat();addMessage("JARVIS could not start the microphone. Please click the microphone button once and try again.");}
+}
+
+function testJarvisVoice(){
+ openChat();
+ const text="Hello Arhaan. I am JARVIS. My voice system is now using the strongest available male AI voice on your device.";
+ addMessage(text);
+ speak(text);
+}
+function geekPrank(){
+ const overlay=document.getElementById("prankOverlay"), text=document.getElementById("prankText");
+ const cracker=document.getElementById("cracker"), bar=document.getElementById("crackerBar"), status=document.getElementById("crackerStatus"), attempt=document.getElementById("crackerAttempt");
+ overlay.style.display="flex";text.innerHTML="";cracker.style.display="block";bar.style.width="0%";
+ document.getElementById("prankTitle").textContent="SECURITY BREACH";
+ const lines=["JARVIS: GEEK PRANK PROTOCOL INITIALIZED","Loading virtual terminal...","Connecting to imaginary mainframe...","Running simulated security check...","Opening DEMO_ACCOUNT...","Starting simulated password analysis..."];
+ let i=0;const intro=setInterval(()=>{text.innerHTML+="> "+lines[i++]+"<br>";if(i>=lines.length){clearInterval(intro);runFakeCracker();}},420);
+ openChat();addMessage("Geek prank activated. Starting fake password cracker.");speak("Geek prank activated, Sir.");
+}
+function runFakeCracker(){
+ const bar=document.getElementById("crackerBar"),status=document.getElementById("crackerStatus"),attempt=document.getElementById("crackerAttempt");let p=0;
+ const timer=setInterval(()=>{p=Math.min(100,p+Math.floor(Math.random()*9)+3);bar.style.width=p+"%";const chars="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$";let guess="";for(let i=0;i<10;i++)guess+=chars[Math.floor(Math.random()*chars.length)];attempt.textContent="Simulated attempt: "+guess;status.textContent=p<100?"Testing virtual combinations... "+p+"%":"Simulation complete.";if(p>=100){clearInterval(timer);attempt.textContent="Result: DEMO PASSWORD ACCEPTED";document.getElementById("prankTitle").textContent="😂 YOU GOT PRANKED!";speak("Password cracked. Just kidding, Sir. This was a harmless simulation.");}},260);
+}
+function closePrank(){document.getElementById("prankOverlay").style.display="none"}
+
+async function getWeather(){
+ if(!navigator.geolocation){document.getElementById("weatherDesc").textContent="Location unavailable";return}
+ navigator.geolocation.getCurrentPosition(async p=>{
+  const lat=p.coords.latitude,lon=p.coords.longitude;
+  try{
+   const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code&timezone=auto`);
+   const d=await r.json(),c=d.current.weather_code;
+   const desc={0:"Clear sky",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",51:"Light drizzle",61:"Rain",71:"Snow",80:"Rain showers",95:"Thunderstorm"}[c]||"Current conditions";
+   weatherData={temp:d.current.temperature_2m,desc};
+   document.getElementById("weather").textContent=d.current.temperature_2m+"°C";
+   document.getElementById("weatherDesc").textContent=desc;
+   document.getElementById("weatherLocation").textContent=`${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+   locationName=`${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+  }catch(e){document.getElementById("weatherDesc").textContent="Weather unavailable"}
+ },()=>{document.getElementById("weatherLocation").textContent="Permission denied";document.getElementById("weatherDesc").textContent="Allow location access"})
+}
+function updateClock(){const n=new Date();document.getElementById("topTime").textContent=n.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});document.getElementById("topDate").textContent=n.toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"});}
+updateClock();setInterval(updateClock,1000);getWeather();
+</script>
+<script>
+const JARVIS_MISSIONS=[["Mission 01","Build a small HTML calculator","Easy"],["Mission 02","Create a weather dashboard","Easy"],["Mission 03","Make a JavaScript quiz app","Medium"],["Mission 04","Design a voice-controlled timer","Medium"],["Mission 05","Create a local notes manager","Medium"],["Mission 06","Build a 3D solar-system demo","Hard"]];
+function openTool(n){let m=document.getElementById("toolModal"),c=document.getElementById("toolContent"),t=document.getElementById("toolTitle");m.style.display="block";
+if(n=="cyber"){t.textContent="JARVIS CYBER LAB — SAFE SIMULATION";c.innerHTML='<div class="toolBox"><b>🛡 SECURITY SIMULATOR</b><p>Training-only visual simulation. No real targets or accounts.</p><button onclick="cyberScan()">RUN DEMO SCAN</button><pre id="cyberOut" class="terminal">READY...</pre></div><div class="toolBox"><b>🔐 PASSWORD STRENGTH LAB</b><input id="pw" type="password" placeholder="Sample password"><button onclick="pwStrength()">CHECK STRENGTH</button><p id="pwResult"></p></div>'}
+if(n=="code"){t.textContent="JARVIS AUTOMATIC CODING LAB";c.innerHTML='<div class="toolBox"><textarea id="cp" rows="7" placeholder="Example: calculator app"></textarea><button onclick="genCode()">GENERATE CODE</button></div><div class="toolBox"><textarea id="co" rows="14"></textarea><button onclick="saveCode()">SAVE HTML</button></div>'}
+if(n=="mission"){t.textContent="JARVIS RANDOM MISSIONS";c.innerHTML='<div id="ml"></div><button onclick="newMissions()">NEW MISSIONS</button>';newMissions()}
+if(n=="map"){t.textContent="JARVIS MAP";c.innerHTML='<div class="toolBox"><button onclick="locateMap()">📍 USE MY LOCATION</button> <span id="ms"></span></div><div class="mapBox"><div class="mapGrid"></div><div id="mapPin" class="mapPin">📍</div></div>';locateMap()}
+if(n=="file"){t.textContent="JARVIS REAL MISSION FILE";c.innerHTML='<div class="toolBox"><textarea id="mf" rows="18"></textarea><button onclick="saveMission()">SAVE</button> <button onclick="downloadMission()">DOWNLOAD TXT</button></div>';document.getElementById("mf").value=localStorage.getItem("jarvisMission")||"JARVIS MISSION FILE\n\nMission: Build something useful today.\nStatus: READY\nNotes: Add your mission here."}}
+function closeTool(){document.getElementById("toolModal").style.display="none"}
+function cyberScan(){let o=document.getElementById("cyberOut"),a=["JARVIS SAFE CYBER LAB","Starting sandbox...","Checking demo services...","Testing local simulation modules...","No real hosts contacted.","SIMULATION COMPLETE."];o.textContent="";let i=0,x=setInterval(()=>{o.textContent+="> "+a[i++]+"\n";if(i>=a.length)clearInterval(x)},400)}
+function pwStrength(){let p=document.getElementById("pw").value,s=(p.length>=8?1:0)+( /[A-Z]/.test(p)?1:0)+( /[a-z]/.test(p)?1:0)+( /\d/.test(p)?1:0)+( /[^A-Za-z0-9]/.test(p)?1:0);document.getElementById("pwResult").textContent=s<3?"Weak":s<5?"Moderate":"Strong"}
+function genCode(){
+ const p=(document.getElementById("cp")?.value||"").toLowerCase();
+ const code=p.includes("calculator")
+  ? "<!doctype html><html><body><h2>Calculator</h2><input id=\"a\" type=\"number\"><input id=\"b\" type=\"number\"><button onclick=\"out.textContent=+a.value + +b.value\">Add</button><p id=\"out\"></p></body></html>"
+  : "<!doctype html><html><body><h2>JARVIS App</h2><p>Your generated starter app.</p></body></html>";
+ const out=document.getElementById("co"); if(out)out.value=code;
+}
+function saveCode(){let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([document.getElementById("co").value],{type:"text/html"}));a.download="jarvis_generated_app.html";a.click()}
+function newMissions(){let a=[...JARVIS_MISSIONS].sort(()=>Math.random()-.5).slice(0,4);document.getElementById("ml").innerHTML=a.map(x=>`<div class="mission"><b>${x[0]}</b> • ${x[2]}<br>${x[1]}</div>`).join("")}
+function locateMap(){if(!navigator.geolocation)return;navigator.geolocation.getCurrentPosition(p=>{document.getElementById("ms").textContent=`${p.coords.latitude.toFixed(4)}, ${p.coords.longitude.toFixed(4)}`},()=>document.getElementById("ms").textContent="Location denied")}
+function saveMission(){localStorage.setItem("jarvisMission",document.getElementById("mf").value);addMessage("Mission file saved locally, Sir.")}
+function downloadMission(){let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([document.getElementById("mf").value],{type:"text/plain"}));a.download="JARVIS_Missions.txt";a.click()}
+</script>
+<script>
+/* ===== JARVIS V10: ORIGINAL HOLOGRAPHIC MAIN UI + SEPARATE PRANK MODE ===== */
+const V10_KEY="JARVIS_PROFILE_V10";
+const V10_DEFAULT={name:"Arhaan",className:"7th",section:"Blue",country:"India",city:"Lawaypora"};
+function v10ProfileData(){
+  try{return {...V10_DEFAULT,...(JSON.parse(localStorage.getItem(V10_KEY))||{})}}catch(e){return {...V10_DEFAULT}}
+}
+function v10Save(p){localStorage.setItem(V10_KEY,JSON.stringify(p))}
+async function v10Hash(s){
+  const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+async function v10Start(){
+  const name=document.getElementById("v10Name").value.trim();
+  const pass=document.getElementById("v10Password").value;
+  const err=document.getElementById("v10Error");
+  const old=v10ProfileData();
+  if(!name){err.textContent="Please enter your name.";return}
+  if(pass.length<4){err.textContent="Password must contain at least 4 characters.";return}
+  const hash=await v10Hash(pass);
+  if(old.passwordHash && hash!==old.passwordHash){
+    err.textContent="Incorrect JARVIS password.";return;
+  }
+  old.name=name; old.passwordHash=hash; v10Save(old);
+  document.getElementById("startupV10").style.display="none";
+  document.getElementById("profileName").textContent=old.name;
+  addMessage("Welcome back, "+old.name+". JARVIS is online.");
+  speak("Welcome back, "+old.name+". JARVIS is online.");
+}
+function v10Init(){
+  const p=v10ProfileData();
+  document.getElementById("v10Name").value=p.name||"";
+  if(p.passwordHash)document.getElementById("v10SetupHint").textContent="Enter your JARVIS password to unlock the system.";
+  const n=document.getElementById("profileName");if(n)n.textContent=p.name;
+}
+function v10Close(){document.getElementById("v10Modal").style.display="none"}
+function v10Show(title,content){document.getElementById("v10Title").textContent=title;document.getElementById("v10Content").innerHTML=content;document.getElementById("v10Modal").style.display="block"}
+
+function v10Calculator(){
+ v10Show("JARVIS REAL CALCULATOR",`
+ <div style="max-width:430px;margin:auto">
+ <input id="v10Calc" class="v10input" value="0" readonly style="width:100%;font-size:25px;text-align:right;margin-bottom:10px">
+ <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px">
+ ${["7","8","9","÷","4","5","6","×","1","2","3","−","0",".","C","+","(",")","%","="].map(x=>`<button class="v10btn" style="font-size:17px;padding:15px" onclick="v10CalcPress('${x}')">${x}</button>`).join("")}
+ </div></div>`);
+}
+let v10Expr="";
+function v10CalcPress(x){
+ const d=document.getElementById("v10Calc");if(!d)return;
+ if(x==="C"){v10Expr="";d.value="0";return}
+ if(x==="="){
+  try{let e=v10Expr.replace(/÷/g,"/").replace(/×/g,"*").replace(/−/g,"-").replace(/%/g,"/100");if(!/^[0-9+\-*/().\s/]+$/.test(e))throw 0;let r=Function('"use strict";return ('+e+')')();if(!Number.isFinite(r))throw 0;v10Expr=String(r);d.value=v10Expr}catch(e){d.value="Error";v10Expr=""}return;
+ }
+ v10Expr+=x;d.value=v10Expr;
+}
+
+function v10Weather(){
+ v10Show("JARVIS REAL-TIME WEATHER",`
+ <div class="toolBox"><div style="display:flex;gap:8px;flex-wrap:wrap">
+ <input id="v10City" class="v10input" value="Srinagar" placeholder="City">
+ <button class="v10btn" onclick="v10CityWeather()">GET WEATHER</button>
+ <button class="v10btn" onclick="v10MyWeather()">📍 MY LOCATION</button></div>
+ <pre id="v10WeatherOut" class="v10term" style="margin-top:12px">Ready.</pre></div>`);
+}
+async function v10FetchWeather(lat,lon,label){
+ const out=document.getElementById("v10WeatherOut");if(!out)return;out.textContent="Retrieving real-time weather...";
+ try{
+  const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code&timezone=auto`);
+  const d=await r.json(),c=d.current;
+  const desc={0:"Clear sky",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",51:"Light drizzle",53:"Drizzle",55:"Heavy drizzle",61:"Rain",63:"Rain",65:"Heavy rain",71:"Snow",73:"Snow",75:"Heavy snow",80:"Rain showers",81:"Rain showers",82:"Heavy rain showers",95:"Thunderstorm",96:"Thunderstorm with hail",99:"Thunderstorm with hail"}[c.weather_code]||"Current conditions";
+  out.textContent=`JARVIS WEATHER REPORT
+------------------------------
+Location    : ${label}
+Temperature : ${c.temperature_2m} °C
+Feels like  : ${c.apparent_temperature} °C
+Humidity    : ${c.relative_humidity_2m} %
+Wind        : ${c.wind_speed_10m} km/h
+Condition   : ${desc}
+Updated     : ${new Date().toLocaleTimeString("en-IN")}
+
+Live data: Open-Meteo`;
+ }catch(e){out.textContent="Weather service unavailable. Check your internet connection."}
+}
+async function v10CityWeather(){
+ const city=document.getElementById("v10City").value.trim(),out=document.getElementById("v10WeatherOut");if(!city)return;
+ out.textContent="Finding "+city+"...";
+ try{
+  const r=await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(city)+"&count=1&language=en&format=json");
+  const d=await r.json();if(!d.results?.length){out.textContent="City not found.";return}
+  const x=d.results[0];v10FetchWeather(x.latitude,x.longitude,`${x.name}, ${x.country}`);
+ }catch(e){out.textContent="Could not reach the weather service."}
+}
+function v10MyWeather(){
+ navigator.geolocation.getCurrentPosition(p=>v10FetchWeather(p.coords.latitude,p.coords.longitude,"Your current location"),()=>{const o=document.getElementById("v10WeatherOut");if(o)o.textContent="Location permission denied."})
+}
+function v10Search(){
+ v10Show("JARVIS REAL INTERNET SEARCH",`
+ <div class="toolBox"><input id="v10SearchBox" class="v10input" style="width:75%" placeholder="Search the internet..."><button class="v10btn" onclick="v10DoSearch()">SEARCH</button>
+ <p class="small">This opens a real Google search in a new browser tab.</p></div>`);
+}
+function v10DoSearch(){
+ const q=document.getElementById("v10SearchBox").value.trim();if(q)window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank","noopener");
+}
+function v10Profile(){
+ const p=v10ProfileData();
+ v10Show("JARVIS PERSONAL PROFILE",`<div class="v10term">NAME      : ${p.name}
+CLASS     : ${p.className}
+SECTION   : ${p.section}
+COUNTRY   : ${p.country}
+CITY      : ${p.city}
+
+PROFILE STATUS: LOCAL</div>`);
+}
+
+/* Spacebar = mic toggle. */
+let v10Mic=false;
+function v10StopMic(){
+ if(recognition){try{recognition.abort()}catch(e){}}
+ if(micStream){try{micStream.getTracks().forEach(t=>t.stop())}catch(e){}micStream=null}
+ v10Mic=false;
+ const l=document.getElementById("listen"),s=document.getElementById("voiceState");
+ if(l){l.textContent="MIC OFF";l.classList.remove("active")}
+ if(s)s.textContent="Microphone off";
+}
+function v10ToggleMic(){
+ if(v10Mic){v10StopMic();return}
+ v10Mic=true;startListening();
+}
+document.addEventListener("keydown",e=>{
+ const tag=(document.activeElement?.tagName||"").toLowerCase();
+ const typing=tag==="input"||tag==="textarea"||document.activeElement?.isContentEditable;
+ if(e.code==="Space"&&!typing&&!e.ctrlKey&&!e.altKey&&!e.shiftKey){e.preventDefault();v10ToggleMic()}
+ if(e.key==="F11"){e.preventDefault();if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()}
+});
+
+/* Commands work from chat and voice. */
+const v10OriginalRespond=window.respond;
+window.respond=function(text){
+ const t=(text||"").toLowerCase().replace(/[.,!?]/g,"").trim();
+ const p=v10ProfileData();
+ if(t.includes("open main menu")||t==="main menu"||t.includes("show main menu")){
+   document.getElementById("startupV10").style.display="none";
+   addMessage("Main menu is open, Sir.");speak("Main menu is open, Sir.");return;
+ }
+ if(t.includes("open internet")){v10Search();return}
+ if(t.startsWith("search ")||t.includes("search the internet for")){
+   let q=t.replace(/^search the internet for/,"").replace(/^search /,"").trim();
+   if(q){window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank","noopener");addMessage("Searching the internet for "+q);speak("Searching the internet.");}return;
+ }
+ if(t.includes("open calculator")||t==="calculator"||t.includes("calculate")){v10Calculator();return}
+ if(t.includes("open weather")||t==="weather"||t.includes("weather report")){v10Weather();v10CityWeather();return}
+ if(t.includes("open profile")||t.includes("show my profile")){v10Profile();return}
+ if(t.includes("what is my name")||t.includes("which class")||t.includes("which section")||t.includes("which country")||t.includes("which city")){
+   let r=`Name: ${p.name}. Class: ${p.className}, Section ${p.section}. Country: ${p.country}. City: ${p.city}.`;
+   addMessage(r);speak(r);return;
+ }
+ return v10OriginalRespond(text);
+};
+
+document.addEventListener("DOMContentLoaded",()=>{
+ v10Init();
+ const mic=document.querySelector(".micButton");if(mic)mic.onclick=v10ToggleMic;
+});
+</script>
+
+<div id="chatQuickV11" style="position:fixed;right:20px;bottom:20px;z-index:25;width:min(360px,calc(100vw - 40px));display:none;background:#020b12ee;border:1px solid #07566c;border-radius:10px;padding:12px;box-shadow:0 0 30px #00d9ff14">
+  <div style="color:#5deaff;font-size:11px;margin-bottom:8px">JARVIS CHAT</div>
+  <div id="chatRepliesV11" style="max-height:180px;overflow:auto;font-size:12px"></div>
+  <div style="display:flex;gap:6px;margin-top:8px">
+    <input id="chatInputV11" placeholder="Talk to JARVIS..." style="flex:1;background:#000;color:#fff;border:1px solid #07566c;padding:9px;border-radius:5px" onkeydown="if(event.key==='Enter')sendChatV11()">
+    <button onclick="sendChatV11()" class="v10btn">➤</button>
+  </div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:8px">
+    <button onclick="quickChatV11('Hello JARVIS')">Hello</button>
+    <button onclick="quickChatV11('What can you do?')">What can you do?</button>
+    <button onclick="quickChatV11('What is my name?')">My name</button>
+    <button onclick="quickChatV11('What time is it?')">Time</button>
+    <button onclick="quickChatV11('Tell me a joke')">Joke</button><button onclick="quickChatV11('open hacking')">Hacking</button>
+  </div>
+</div>
+
+<script>
+/* ===== JARVIS V11 CONVERSATION ENGINE ===== */
+const V11_RESPONSES = {
+  hello: [
+    "Hello, Sir. JARVIS is online and ready.",
+    "Good to see you, Sir. How can I assist you?",
+    "Hello Arhaan. All systems are standing by."
+  ],
+  thanks: [
+    "You're welcome, Sir.",
+    "Anytime, Sir.",
+    "My pleasure. JARVIS is here to assist."
+  ],
+  how: [
+    "I'm operating normally, Sir. Voice, chat and utility systems are ready.",
+    "All systems are online. Give me a command or ask me a question."
+  ],
+  joke: [
+    "Why did the computer go to the doctor? It had a byte of a problem.",
+    "I would tell you a hacker joke, Sir, but you might already know the punchline."
+  ],
+  capabilities: [
+    "I can chat with you, use voice commands, show your profile, open the calculator, check real-time weather, search the internet, open the map, run the coding lab, show missions, and open the Cyber Prank mode."
+  ],
+  status: [
+    "JARVIS status: ONLINE. Main interface ready. Voice and chat systems standing by."
+  ]
+};
+
+function v11Pick(a){return a[Math.floor(Math.random()*a.length)]}
+
+function v11Reply(text){
+  const t=(text||"").toLowerCase().trim();
+  const p=v10ProfileData ? v10ProfileData() : {name:"Arhaan",className:"7th",section:"Blue",country:"India",city:"Lawaypora"};
+  if(!t)return "I'm listening, Sir.";
+  if(/^(hi|hello|hey|good morning|good afternoon|good evening)/.test(t))return v11Pick(V11_RESPONSES.hello);
+  if(t.includes("thank"))return v11Pick(V11_RESPONSES.thanks);
+  if(t.includes("how are you")||t.includes("how are things"))return "I'm doing well, Sir. All systems are ready.";
+  if(t.includes("what can you do")||t.includes("what are your capabilities"))return v11Pick(V11_RESPONSES.capabilities);
+  if(t.includes("status")||t.includes("are you online"))return v11Pick(V11_RESPONSES.status);
+  if(t.includes("tell me a joke")||t.includes("joke"))return v11Pick(V11_RESPONSES.joke);
+  if(t.includes("what is my name")||t.includes("who am i"))return `Your name is ${p.name}, Sir.`;
+  if(t.includes("which class")||t.includes("what class"))return `You are in Class ${p.className}, Section ${p.section}, Sir.`;
+  if(t.includes("which country")||t.includes("my country"))return `You live in ${p.country}, Sir.`;
+  if(t.includes("which city")||t.includes("my city"))return `You live in ${p.city}, Sir.`;
+  if(t.includes("what time")||t==="time")return `The current time is ${new Date().toLocaleTimeString("en-IN")}, Sir.`;
+  if(t.includes("what date")||t.includes("today's date")||t==="date")return `Today is ${new Date().toLocaleDateString("en-IN",{weekday:"long",year:"numeric",month:"long",day:"numeric"})}, Sir.`;
+  if(t.includes("where do i live"))return `Your profile says ${p.city}, ${p.country}, Sir.`;
+  if(t.includes("your name")||t.includes("who are you"))return "I am JARVIS, your personal AI assistant.";
+  return null;
+}
+
+function showChatV11(){
+  const box=document.getElementById("chatQuickV11");
+  if(box)box.style.display="block";
+}
+function addChatV11(who,text){
+  const box=document.getElementById("chatRepliesV11");
+  if(!box)return;
+  const row=document.createElement("div");
+  row.style.cssText=who==="You"?"color:#8caab3;margin:6px 0":"color:#65eaff;margin:6px 0";
+  row.textContent=(who==="You"?"YOU: ":"JARVIS: ")+text;
+  box.appendChild(row);box.scrollTop=box.scrollHeight;
+}
+function sendChatV11(){
+  const input=document.getElementById("chatInputV11"),text=input.value.trim();
+  if(!text)return;input.value="";showChatV11();addChatV11("You",text);
+  const reply=v11Reply(text);
+  if(reply){setTimeout(()=>{addChatV11("JARVIS",reply);speak(reply)},180)}
+  else if(window.respond) window.respond(text);
+}
+function quickChatV11(t){
+  document.getElementById("chatInputV11").value=t;sendChatV11();
+}
+
+/* Expose the chat engine to the existing chat/voice command flow. */
+const oldRespondV11=window.respond;
+window.respond=function(text){
+  const reply=v11Reply(text);
+  if(reply){
+    showChatV11();addChatV11("You",text);
+    setTimeout(()=>{addChatV11("JARVIS",reply);speak(reply)},120);
+    return;
+  }
+  return oldRespondV11 ? oldRespondV11(text) : undefined;
+};
+
+document.addEventListener("DOMContentLoaded",()=>{
+  setTimeout(showChatV11,500);
+});
+</script>
+
+<!-- JARVIS EDITH CYBER DESKTOP — SAFE VISUAL SIMULATION -->
+<div id="hackingGateV12" style="display:none;position:fixed;inset:0;z-index:3000;background:#02050a;align-items:center;justify-content:center;font-family:Consolas,monospace">
+  <div class="edithGate">
+    <div class="edithLogo">EDITH <small>CYBER CORE</small></div>
+    <div class="edithGateTitle">SECURE CYBER DESKTOP</div>
+    <div class="edithGateSub">VISUAL SIMULATION • OFFLINE SANDBOX</div>
+    <input id="hackPassV12" type="password" placeholder="ENTER EDITH PASSWORD" autocomplete="off">
+    <button onclick="unlockHackingV12()">ENTER CYBER DESKTOP</button>
+    <div class="edithHint">Cyber password: <b>edith</b></div>
+    <div id="hackErrorV12"></div>
+  </div>
+</div>
+
+<div id="hackingModeV12" style="display:none;position:fixed;inset:0;z-index:2990;background:#02060b;color:#d9ffe9;font-family:Segoe UI,Tahoma,Arial,sans-serif;overflow:hidden">
+<style>
+#edithDesk{position:absolute;inset:0;overflow:hidden;background:
+ radial-gradient(circle at 70% 25%,rgba(0,190,255,.18),transparent 28%),
+ radial-gradient(circle at 20% 75%,rgba(0,255,145,.12),transparent 25%),
+ linear-gradient(135deg,#02060c 0%,#06131e 48%,#02070c 100%);}
+#edithDesk:before{content:"";position:absolute;inset:0;opacity:.22;background:
+ linear-gradient(115deg,transparent 0 45%,rgba(0,220,255,.16) 46%,transparent 47%),
+ repeating-linear-gradient(0deg,transparent 0 39px,rgba(50,220,255,.055) 40px),
+ repeating-linear-gradient(90deg,transparent 0 59px,rgba(50,220,255,.04) 60px);pointer-events:none;}
+#edithDesk:after{content:"EDITH • GLOBAL CYBER INTELLIGENCE";position:absolute;left:34px;bottom:68px;font:700 46px/1 Consolas,monospace;letter-spacing:4px;color:#44dfff12;pointer-events:none;}
+.edithTop{height:48px;position:absolute;left:0;right:0;top:0;background:linear-gradient(180deg,#071b27,#030b11);border-bottom:1px solid #147e9b;box-shadow:0 0 24px #00d9ff14;display:flex;align-items:center;z-index:100;padding:0 16px;box-sizing:border-box;}
+.edithBrand{font:700 20px Consolas;color:#62eaff;letter-spacing:3px;margin-right:28px}.edithBrand small{font-size:8px;color:#6c8f9b;letter-spacing:1px;display:block;margin-top:-2px}
+.edithNav{display:flex;gap:18px;font:12px Consolas;color:#8db7c4}.edithNav span{cursor:pointer}.edithNav span:hover{color:#fff}
+.edithStatus{margin-left:auto;display:flex;align-items:center;gap:7px;font:11px Consolas;color:#69ff9c}.edithDot{width:10px;height:10px;border-radius:50%;background:#28ff76;box-shadow:0 0 14px #28ff76}
+.edithFull{margin-left:18px;background:#092534;color:#6eeaff;border:1px solid #1a8eac;padding:7px 11px;cursor:pointer}.edithExit{margin-left:7px;background:#351015;color:#ff9b9b;border:1px solid #91434b;padding:7px 11px;cursor:pointer}
+.edithDesktopIcon{position:absolute;width:82px;text-align:center;color:#d7f9ff;font:11px Segoe UI;cursor:pointer;z-index:4;text-shadow:0 2px 5px #000}.edithDesktopIcon div{font-size:30px;margin-bottom:5px}.edithDesktopIcon:hover{filter:brightness(1.5)}
+.edithWindow{position:absolute;background:rgba(3,12,17,.95);border:1px solid #158aa6;box-shadow:0 12px 45px #000b,0 0 22px #00cfff12;min-width:300px;min-height:180px;resize:both;overflow:hidden;border-radius:3px;z-index:10}
+.edithTitle{height:31px;background:linear-gradient(90deg,#0a2a38,#06151d);border-bottom:1px solid #126b82;display:flex;align-items:center;padding:0 7px;box-sizing:border-box;color:#d8faff;font:700 11px Consolas;cursor:move}.edithTitle .sub{color:#557d88;font-weight:400;margin-left:8px}.edithBtns{margin-left:auto}.edithBtns button{width:24px;height:21px;padding:0;margin-left:3px;background:#0b2029;border:1px solid #236274;color:#8edcec;cursor:pointer}.edithBtns button:hover{background:#16404f}
+.edithBody{height:calc(100% - 31px);padding:9px;box-sizing:border-box;overflow:auto}.edithGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.edithCard{border:1px solid #144c5c;background:linear-gradient(145deg,#071923,#041017);padding:9px}.edithCard h4{margin:0 0 7px;color:#58eaff;font:700 11px Consolas}.edithMetric{font:12px Consolas;color:#9bd0dc;display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dotted #163c48}.edithGreen{color:#5cff9d}.edithAmber{color:#ffd36a}.edithRed{color:#ff6d7a}
+.edithTerm{height:100%;min-height:210px;background:#010504;color:#55ff91;font:12px/1.45 Consolas,monospace;white-space:pre-wrap;padding:10px;box-sizing:border-box;overflow:auto;border:1px solid #153c2a}.edithInput{background:#020a0d;border:1px solid #1c5c6d;color:#bffff0;padding:7px;width:100%;box-sizing:border-box;font:12px Consolas}.edithBtn{background:#082b38;border:1px solid #167d97;color:#6feaff;padding:7px 10px;cursor:pointer;font:11px Consolas}.edithBtn:hover{background:#0d4050}.edithProgress{height:8px;background:#061015;border:1px solid #15414f;margin-top:8px}.edithProgress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1cf2ff,#46ff8a);box-shadow:0 0 10px #35ffbb;transition:width .3s}
+.edithGlobe{position:relative;height:250px;perspective:800px;overflow:hidden;background:radial-gradient(circle at 50% 50%,#0b3440,#02080c 62%)}.edithGlobeCore{position:absolute;width:190px;height:190px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid #37eaff;background:radial-gradient(circle at 35% 30%,#1b7e90,#06212a 55%,#02070b 70%);box-shadow:0 0 35px #00d9ff55,inset 0 0 35px #00d9ff33;animation:globeSpin 9s linear infinite}.edithGlobeCore:before,.edithGlobeCore:after{content:"";position:absolute;inset:12px;border:1px solid #36eaff55;border-radius:50%;transform:rotateX(65deg)}.edithGlobeCore:after{transform:rotateY(65deg)}
+.edithOrbit{position:absolute;left:50%;top:50%;width:330px;height:110px;border:1px solid #25eaff66;border-radius:50%;transform:translate(-50%,-50%) rotate(18deg);animation:orbitSpin 4s linear infinite}.edithOrbit i{position:absolute;width:7px;height:7px;border-radius:50%;background:#42ff9a;box-shadow:0 0 10px #42ff9a;top:50%;left:-3px}.edithNode{position:absolute;width:7px;height:7px;border-radius:50%;background:#ff5166;box-shadow:0 0 12px #ff5166;animation:nodePulse 1s infinite alternate}.edithLine{position:absolute;height:1px;background:linear-gradient(90deg,transparent,#42eaff,transparent);transform-origin:left center;opacity:.55}
+@keyframes globeSpin{to{transform:translate(-50%,-50%) rotateY(360deg)}}@keyframes orbitSpin{to{transform:translate(-50%,-50%) rotate(378deg)}}@keyframes nodePulse{to{transform:scale(1.8);opacity:.4}}
+.edithCams{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.edithCam{height:105px;position:relative;overflow:hidden;background:linear-gradient(135deg,#16202a,#060b10);border:1px solid #1a5968}.edithCam:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 5px,#b4f8ff0a 6px),linear-gradient(110deg,transparent 20%,#42eaff18 50%,transparent 80%);animation:camscan 2.2s linear infinite}.edithCam:after{content:"";position:absolute;left:-20%;top:0;width:20%;height:100%;background:linear-gradient(90deg,transparent,#6fffff22,transparent);animation:camSweep 2.8s linear infinite}.edithCamLabel{position:absolute;left:6px;top:5px;color:#bffcff;font:10px Consolas;z-index:2}.edithSil{position:absolute;bottom:0;width:18px;height:55px;background:#101820;border-radius:12px 12px 0 0;box-shadow:30px 5px 0 #17232c,62px 1px 0 #0c151c,94px 8px 0 #17232c;left:25px}.edithCamTime{position:absolute;right:5px;bottom:4px;color:#ff6f78;font:9px Consolas;z-index:2}.edithGPS{height:210px;position:relative;background:radial-gradient(circle at 48% 48%,#183c31,#07100e 65%);border:1px solid #164c3c;overflow:hidden}.edithGPS:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 24px,#56ffb20d 25px),repeating-linear-gradient(90deg,transparent 0 24px,#56ffb20d 25px)}.edithRoad{position:absolute;background:#263a39;border:1px solid #47675f}.edithPin{position:absolute;width:15px;height:15px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#ff5167;box-shadow:0 0 18px #ff5167}.edithGPSInfo{position:absolute;left:8px;bottom:7px;background:#03110cdd;border:1px solid #267056;padding:7px;color:#7dffb2;font:10px Consolas;z-index:3}
+.edithCode{height:245px;background:#010604;color:#52ff95;padding:10px;box-sizing:border-box;overflow:auto;font:11px/1.35 Consolas;white-space:pre}.edithSideTools{display:grid;grid-template-columns:1fr 1fr;gap:6px}.edithTool{padding:8px;background:#071a22;border:1px solid #175264;color:#aeefff;cursor:pointer;font:10px Consolas}.edithTool:hover{background:#0c2d39}.edithTask{position:absolute;left:0;right:0;bottom:0;height:38px;background:linear-gradient(#09212a,#040b10);border-top:1px solid #1b6b7c;display:flex;align-items:center;gap:5px;padding:0 7px;z-index:150}.edithStart{background:#0a3a49;color:#7ceaff;border:1px solid #238da4;height:28px;padding:0 12px;font-weight:700}.edithTask button{height:27px;background:#071b22;color:#9edbe7;border:1px solid #1b4e5d;font:10px Consolas;cursor:pointer}.edithTaskClock{margin-left:auto;color:#8fe7f4;font:11px Consolas}
+.edithGate{width:min(460px,90vw);padding:30px;border:1px solid #1b9fbd;background:radial-gradient(circle at 50% 0,#0a2732,#02070a 65%);box-shadow:0 0 80px #00d9ff1c;text-align:center}.edithLogo{font:700 30px Consolas;color:#62eaff;letter-spacing:7px}.edithLogo small{display:block;font-size:8px;letter-spacing:3px;color:#6b8d98;margin-top:5px}.edithGateTitle{margin-top:24px;color:#e7fbff;font:700 15px Consolas;letter-spacing:3px}.edithGateSub{margin:9px 0 20px;color:#5e8792;font:9px Consolas}.edithGate input{width:100%;box-sizing:border-box;padding:13px;background:#010506;color:#70ffae;border:1px solid #1b6577;font:13px Consolas}.edithGate button{width:100%;margin-top:10px;padding:12px;background:#082b36;color:#67eaff;border:1px solid #1d8ca7;cursor:pointer;font:700 11px Consolas}.edithHint{margin-top:12px;color:#52717a;font:9px Consolas}.edithHint b{color:#66ffad}.edithGate #hackErrorV12{color:#ff7180;font:10px Consolas;margin-top:8px}
+@keyframes camscan{to{background-position:0 12px,0 0}}@keyframes camSweep{to{left:110%}}
+@media(max-width:900px){.edithNav{display:none}.edithWindow{max-width:calc(100vw - 120px)}.edithGrid{grid-template-columns:1fr}}
+</style>
+<div id="edithDesk">
+  <div class="edithTop"><div class="edithBrand">EDITH<small>GLOBAL CYBER INTELLIGENCE</small></div><div class="edithNav"><span onclick="cyOpenWindow('terminal')">Terminal</span><span onclick="cyOpenWindow('network')">Network</span><span onclick="cyOpenWindow('tools')">Tools</span><span onclick="cyOpenWindow('password')">Password</span><span onclick="cyOpenWindow('gps')">Tracking</span><span onclick="cyOpenWindow('cctv')">Surveillance</span><span onclick="cyOpenWindow('code')">Automation</span><span onclick="cyOpenWindow('database')">Database</span></div><div class="edithStatus"><i class="edithDot"></i> SECURE SANDBOX</div><button class="edithFull" onclick="cyFullscreen()">⛶ FULL SCREEN</button><button class="edithExit" onclick="closeHackingV12()">EXIT</button></div>
+  <div class="edithDesktopIcon" style="left:20px;top:75px" onclick="cyOpenWindow('terminal')"><div>🖥️</div>Terminal</div>
+  <div class="edithDesktopIcon" style="left:20px;top:155px" onclick="cyOpenWindow('network')"><div>🌐</div>Network</div>
+  <div class="edithDesktopIcon" style="left:20px;top:235px" onclick="cyOpenWindow('tools')"><div>🧰</div>Cyber Tools</div>
+  <div class="edithDesktopIcon" style="left:20px;top:315px" onclick="cyOpenWindow('password')"><div>🔐</div>Password</div>
+  <div class="edithDesktopIcon" style="left:20px;top:395px" onclick="cyOpenWindow('gps')"><div>📍</div>GPS Tracker</div>
+  <div class="edithDesktopIcon" style="left:20px;top:475px" onclick="cyOpenWindow('cctv')"><div>📹</div>CCTV</div>
+  <div class="edithDesktopIcon" style="left:110px;top:75px" onclick="cyOpenWindow('code')"><div>⌨️</div>Auto Code</div>
+  <div class="edithDesktopIcon" style="left:110px;top:155px" onclick="cyOpenWindow('database')"><div>🗄️</div>Database</div>
+  <div class="edithDesktopIcon" style="left:110px;top:235px" onclick="cyOpenWindow('logs')"><div>📋</div>Logs</div>
+  <div class="edithDesktopIcon" style="left:110px;top:315px" onclick="cyOpenWindow('matrix')"><div>🟩</div>Matrix</div>
+  <div id="cyWindows"></div>
+  <div class="edithTask"><button class="edithStart" onclick="cyOpenWindow('terminal')">◉ EDITH</button><button onclick="cyOpenWindow('terminal')">Terminal</button><button onclick="cyOpenWindow('network')">Network</button><button onclick="cyOpenWindow('cctv')">CCTV</button><button onclick="cyOpenWindow('tools')">Tools</button><div class="edithTaskClock" id="cyClock">00:00:00</div></div>
+</div>
+</div>
+<script>
+const HACK_PASS_KEY="jarvisCyberPasswordV12";
+let cyZ=20,cyTimers=[],cyCodeTimers=[];
+function openHackingV12(){const gate=document.getElementById('hackingGateV12');if(gate)gate.style.display='none';const mode=document.getElementById('hackingModeV12');if(mode)mode.style.display='block';cyStartDesktop();}
+function unlockHackingV12(){const p=(document.getElementById('hackPassV12')||{}).value||'';const e=document.getElementById('hackErrorV12');if(p.toLowerCase()!=='edith'){if(e)e.textContent='ACCESS DENIED — use the EDITH cyber password.';return}openHackingV12()}
+function closeHackingV12(){const mode=document.getElementById('hackingModeV12');if(mode)mode.style.display='none';cyStopTimers();if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
+function cyStartDesktop(){cyCloseAll();cyClock();cyOpenWindow('network');cyOpenWindow('terminal');setTimeout(()=>cyOpenWindow('cctv'),350);setTimeout(()=>cyOpenWindow('code'),700);}
+function cyStopTimers(){cyTimers.forEach(clearInterval);cyTimers=[];cyCodeTimers.forEach(clearInterval);cyCodeTimers=[];}
+function cyClock(){let f=()=>{const e=document.getElementById('cyClock');if(e)e.textContent=new Date().toLocaleTimeString('en-IN')};f();cyTimers.push(setInterval(f,1000));}
+function cyFullscreen(){const el=document.getElementById('hackingModeV12');if(!document.fullscreenElement)el.requestFullscreen?.().catch(()=>{});else document.exitFullscreen?.().catch(()=>{});}
+function cyWin(title,html,left,top,w,h,id){return `<div class="edithWindow" id="cyw-${id}" style="left:${left}px;top:${top}px;width:${w}px;height:${h}px;z-index:${++cyZ}"><div class="edithTitle" onmousedown="cyDrag(event,'cyw-${id}')"><span>${title}</span><span class="sub">EDITH SIMULATION</span><span class="edithBtns"><button onclick="cyMin('${id}')">_</button><button onclick="cyMax('${id}')">□</button><button onclick="cyClose('${id}')">×</button></span></div><div class="edithBody">${html}</div></div>`}
+function cyOpenWindow(type){const root=document.getElementById('cyWindows');if(!root)return;let id=type+Date.now()+Math.floor(Math.random()*1000),x=145+Math.floor(Math.random()*Math.max(20,Math.min(500,innerWidth-650))),y=70+Math.floor(Math.random()*Math.max(20,Math.min(280,innerHeight-430))),html='',title='',w=520,h=340;
+if(type==='network'){title='Network Simulation — 3D Global Grid';w=610;h=380;html=`<div class="edithGlobe" id="globe-${id}"><div class="edithGlobeCore"></div><div class="edithOrbit"><i></i></div><div class="edithNode" style="left:25%;top:35%"></div><div class="edithNode" style="left:69%;top:28%;animation-delay:.3s"></div><div class="edithNode" style="left:76%;top:65%;animation-delay:.6s"></div><div class="edithNode" style="left:33%;top:71%;animation-delay:.9s"></div><div class="edithLine" style="width:220px;left:28%;top:38%;transform:rotate(16deg)"></div><div class="edithLine" style="width:210px;left:52%;top:48%;transform:rotate(145deg)"></div><div class="edithLine" style="width:180px;left:39%;top:72%;transform:rotate(-28deg)"></div></div><div class="edithGrid"><div class="edithCard"><h4>LIVE CONNECTIONS</h4><div class="edithMetric"><span>Total Nodes</span><b class="edithGreen" id="nodes-${id}">8,472</b></div><div class="edithMetric"><span>Active</span><b>2,931</b></div><div class="edithMetric"><span>Encrypted</span><b>894</b></div></div><div class="edithCard"><h4>SIMULATED STATUS</h4><div class="edithMetric"><span>Core</span><b class="edithGreen">ONLINE</b></div><div class="edithMetric"><span>Firewall</span><b class="edithGreen">ENABLED</b></div><div class="edithMetric"><span>Real targets</span><b class="edithRed">NONE</b></div></div></div>`;setTimeout(()=>{let e=document.getElementById('nodes-'+id);if(e)cyTimers.push(setInterval(()=>e.textContent=(8000+Math.floor(Math.random()*1200)).toLocaleString(),700))},30)}
+if(type==='terminal'){title='Live Terminal';html=`<div class="edithTerm" id="cyterm-${id}">EDITH CYBER TERMINAL v3.0\n----------------------------------------\nSIMULATION MODE: ACTIVE\nREAL NETWORK ACCESS: DISABLED\n\n> READY_</div><div style="display:flex;gap:6px;margin-top:7px"><button class="edithBtn" onclick="cyRunDemo('${id}')">RUN DEMO</button><button class="edithBtn" onclick="cyTypeBurst('${id}')">HACKER TYPER</button><button class="edithBtn" onclick="cyTerminalClear('${id}')">CLEAR</button></div>`}
+if(type==='password'){title='Password Cracker — Visual Simulation';html=`<div class="edithCard"><h4>SIMULATED PASSWORD ANALYSIS</h4><p style="font:10px Consolas;color:#7f9ca5">Enter a fictional sample only. No accounts or credentials are accessed.</p><input class="edithInput" id="cypw-${id}" type="password" placeholder="Sample password"><div style="margin-top:8px"><button class="edithBtn" onclick="cyCrack('${id}')">START SIMULATION</button></div><div class="edithProgress"><i id="cybar-${id}"></i></div><div id="cypwr-${id}" style="margin-top:9px;color:#63ff9c;font:11px Consolas"></div><pre class="edithTerm" id="cycracklog-${id}" style="height:130px;margin-top:8px">READY — waiting for demo input...</pre></div>`}
+if(type==='gps'){title='GPS Tracker — Fictional Demo';html=`<div class="edithGPS"><div class="edithRoad" style="width:85%;height:8%;left:7%;top:35%;transform:rotate(-16deg)"></div><div class="edithRoad" style="width:8%;height:90%;left:58%;top:5%;transform:rotate(18deg)"></div><div class="edithRoad" style="width:70%;height:7%;left:18%;top:68%;transform:rotate(9deg)"></div><div class="edithPin" style="left:59%;top:44%"></div><div class="edithGPSInfo">DEVICE: DEMO-01<br>STATUS: <span class="edithGreen">SIMULATED LIVE</span><br>LAT: 28.6139 N<br>LON: 77.2090 E<br>ACCURACY: 3.2 m<br>NO REAL PERSON TRACKED</div></div>`}
+if(type==='cctv'){title='CCTV Surveillance — Simulated Feeds';w=560;h=330;html=`<div class="edithCams"><div class="edithCam"><span class="edithCamLabel">CAM 01 • LOBBY</span><div class="edithSil"></div><span class="edithCamTime">● LIVE SIM</span></div><div class="edithCam"><span class="edithCamLabel">CAM 02 • PARKING</span><div class="edithSil" style="left:60px;transform:scale(.7)"></div><span class="edithCamTime">● LIVE SIM</span></div><div class="edithCam"><span class="edithCamLabel">CAM 03 • SERVER ROOM</span><div class="edithSil" style="left:110px;transform:scale(.55)"></div><span class="edithCamTime">● LIVE SIM</span></div><div class="edithCam"><span class="edithCamLabel">CAM 04 • OFFICE</span><div class="edithSil" style="left:40px;transform:scale(.8)"></div><span class="edithCamTime">● LIVE SIM</span></div></div><div style="margin-top:7px;color:#587b84;font:9px Consolas">FOOTAGE IS PROCEDURALLY GENERATED • NOT REAL CCTV</div>`}
+if(type==='code'){title='Automated Code Panel — Generator';w=540;h=340;html=`<div class="edithCode" id="cycode-${id}"></div><div style="display:flex;gap:6px;margin-top:7px"><button class="edithBtn" onclick="cyCodeBurst('${id}')">GENERATE NOW</button><button class="edithBtn" onclick="cyCodeStop('${id}')">STOP</button></div>`;setTimeout(()=>cyStartCode(id),30)}
+if(type==='tools'){title='Cyber Tools — Simulation Console';w=540;h=350;html=`<div class="edithSideTools"><button class="edithTool" onclick="cyTool('${id}','PORT MAP')">◈ Port Map</button><button class="edithTool" onclick="cyTool('${id}','FIREWALL')">◈ Firewall</button><button class="edithTool" onclick="cyTool('${id}','PACKET VIEW')">◈ Packet Viewer</button><button class="edithTool" onclick="cyTool('${id}','TRACE')">◈ Trace Simulation</button><button class="edithTool" onclick="cyTool('${id}','HASH LAB')">◈ Hash Lab</button><button class="edithTool" onclick="cyTool('${id}','LOG ANALYZER')">◈ Log Analyzer</button><button class="edithTool" onclick="cyTool('${id}','NETWORK MAP')">◈ Network Map</button><button class="edithTool" onclick="cyTool('${id}','SYSTEM MONITOR')">◈ System Monitor</button></div><pre class="edithTerm" id="cytools-${id}" style="height:190px;margin-top:8px">SELECT A SAFE SIMULATION TOOL...</pre>`}
+if(type==='database'){title='Demo Database Viewer';w=560;h=320;html=`<div class="edithCard"><h4>FICTIONAL NODES</h4><div class="edithMetric"><span>192.0.2.10</span><b class="edithGreen">ONLINE</b></div><div class="edithMetric"><span>198.51.100.24</span><b class="edithAmber">TRACING</b></div><div class="edithMetric"><span>203.0.113.77</span><b class="edithRed">OFFLINE</b></div><div class="edithMetric"><span>DEMO-CORE</span><b class="edithGreen">ONLINE</b></div></div><pre class="edithTerm" style="height:155px;margin-top:8px">[DB] Loading fictional records...\n[DB] 4 demo rows loaded\n[DB] No real database connected\n[DB] READ-ONLY SIMULATION</pre>`}
+if(type==='logs'){title='Security Event Viewer';html=`<pre class="edithTerm" style="height:260px">[LIVE SIMULATION LOG]\n[12:00:01] EDITH CORE ONLINE\n[12:00:03] SANDBOX INITIALIZED\n[12:00:05] 3D NETWORK VISUALIZER STARTED\n[12:00:08] DEMO CCTV FEEDS READY\n[12:00:11] AUTOMATED CODE GENERATOR READY\n[12:00:14] FIREWALL: SIMULATED ENABLED\n[12:00:18] NO REAL TARGETS CONTACTED\n[12:00:22] SAFE MODE: ACTIVE</pre>`}
+if(type==='matrix'){title='Matrix Rain — Visual Simulation';html=`<div id="cym-${id}" style="height:250px;background:#000;color:#20ff70;font:12px Consolas;overflow:hidden;padding:5px;box-sizing:border-box"></div>`;setTimeout(()=>cyMatrix(id),20)}
+root.insertAdjacentHTML('beforeend',cyWin(title,html,x,y,w,h,id));cyBring('cyw-'+id)}
+function cyClose(id){const e=document.getElementById('cyw-'+id);if(e)e.remove();cyCodeStop(id)}
+function cyMin(id){const e=document.getElementById('cyw-'+id);if(e){const b=e.querySelector('.edithBody');b.style.display=b.style.display==='none'?'block':'none'}}
+function cyMax(id){const e=document.getElementById('cyw-'+id);if(!e)return;e.dataset.max=e.dataset.max==='1'?'0':'1';if(e.dataset.max==='1'){e.dataset.old=e.style.cssText;e.style.left='125px';e.style.top='60px';e.style.width='calc(100vw - 145px)';e.style.height='calc(100vh - 112px)'}else e.style.cssText=e.dataset.old}
+function cyCloseAll(){const e=document.getElementById('cyWindows');if(e)e.innerHTML='';cyCodeTimers.forEach(clearInterval);cyCodeTimers=[]}
+function cyBring(id){const e=document.getElementById(id);if(e){e.style.zIndex=++cyZ}}
+function cyDrag(ev,id){if(ev.target.closest('button'))return;const e=document.getElementById(id);if(!e)return;cyBring(id);const r=e.getBoundingClientRect(),ox=ev.clientX-r.left,oy=ev.clientY-r.top;function m(a){e.style.left=Math.max(0,a.clientX-ox)+'px';e.style.top=Math.max(48,a.clientY-oy)+'px'}function u(){removeEventListener('mousemove',m);removeEventListener('mouseup',u)}addEventListener('mousemove',m);addEventListener('mouseup',u)}
+function cyRunDemo(id){const o=document.getElementById('cyterm-'+id);if(!o)return;const a=['BOOTING EDITH VISUAL SANDBOX...','Loading virtual kernel... OK','Initializing fictional nodes... OK','Node 01 ........ ONLINE','Node 02 ........ ONLINE','Firewall ........ SIMULATED','Rendering packet stream ........ 100%','VISUAL SEQUENCE COMPLETE','No real systems were contacted.','> READY_'];o.textContent='';let i=0,tm=setInterval(()=>{o.textContent+=a[i++]+'\n';o.scrollTop=o.scrollHeight;if(i>=a.length)clearInterval(tm)},180);cyTimers.push(tm)}
+function cyTypeBurst(id){const o=document.getElementById('cyterm-'+id);if(!o)return;let chars='01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%<>/\\';let s='';for(let i=0;i<1200;i++)s+=chars[Math.floor(Math.random()*chars.length)];o.textContent+='\n> '+s+'\n> VISUAL SIMULATION COMPLETE\n';o.scrollTop=o.scrollHeight}
+function cyTerminalClear(id){const o=document.getElementById('cyterm-'+id);if(o)o.textContent='EDITH CYBER TERMINAL\n> READY_'}
+function cyCrack(id){const p=document.getElementById('cypw-'+id).value||'';const out=document.getElementById('cypwr-'+id),log=document.getElementById('cycracklog-'+id),bar=document.getElementById('cybar-'+id);let n=0;log.textContent='STARTING FICTIONAL PASSWORD ANALYSIS...\n';let tm=setInterval(()=>{n=Math.min(100,n+Math.floor(Math.random()*12)+5);bar.style.width=n+'%';log.textContent+='> DEMO COMBINATION '+Math.random().toString(36).slice(2,10)+' .... '+(n<100?'REJECTED':'SIMULATION COMPLETE')+'\n';log.scrollTop=log.scrollHeight;if(n>=100){clearInterval(tm);out.textContent='RESULT: SAMPLE ANALYSIS COMPLETE • STRENGTH '+(p.length>=10?'MODERATE':'WEAK')+' • NO REAL CREDENTIALS USED';}},220);cyTimers.push(tm)}
+function cyStartCode(id){const o=document.getElementById('cycode-'+id);if(!o)return;const tm=setInterval(()=>cyCodeBurst(id),850);cyCodeTimers.push(tm);cyCodeBurst(id)}
+function cyCodeBurst(id){const o=document.getElementById('cycode-'+id);if(!o)return;const kw=['const','let','function','if','return','for','while','class'];const vars=['node','packet','matrix','core','route','signal','index','buffer','status'];let s='// EDITH AUTOMATED CODE STREAM — SIMULATION\n';for(let i=0;i<12;i++){const k=kw[Math.floor(Math.random()*kw.length)],v=vars[Math.floor(Math.random()*vars.length)],n=Math.floor(Math.random()*9999);s+=`${k} ${v}${i} = ${n};\n`;if(Math.random()>.4)s+=`  ${v}${i} += Math.floor(Math.random()*64);\n`;if(Math.random()>.5)s+=`  console.log("${v.toUpperCase()}_${n}");\n`}o.textContent=(o.textContent+s+'\n').slice(-8500);o.scrollTop=o.scrollHeight}
+function cyCodeStop(id){const prefix='cycode-'+id;/* generator timers are short-lived; clear globally on exit */}
+function cyTool(id,name){const o=document.getElementById('cytools-'+id);if(!o)return;const lines={"PORT MAP":["> PORT MAP SIMULATION","21 / CLOSED","22 / DEMO SSH","80 / DEMO HTTP","443 / DEMO HTTPS","No real host contacted."],"FIREWALL":["> FIREWALL SIMULATION","Inbound: BLOCKED","Outbound: ALLOWED","Rules loaded: 12","Status: ENABLED"],"PACKET VIEW":["> PACKET VIEWER","Packet 0001 .... DEMO","Packet 0002 .... DEMO","Encryption .... AES-256 (visual)","Capture source: SANDBOX"],"TRACE":["> TRACE SIMULATION","Hop 01 .... DEMO ROUTER","Hop 02 .... DEMO GATEWAY","Destination .... FICTIONAL NODE","Trace complete."],"HASH LAB":["> HASH LAB","SHA-256 visual demonstration","No credentials stored."],"LOG ANALYZER":["> LOG ANALYZER","Events parsed: 42","Warnings: 3","Critical: 0","Analysis complete."],"NETWORK MAP":["> NETWORK MAP","3D visualizer available from Network window."],"SYSTEM MONITOR":["> SYSTEM MONITOR","CPU .... 64%","RAM .... 71%","GPU .... 48%","Network .... 82%"]};o.textContent=lines[name].join('\n')+'\n';}
+function cyMatrix(id){const o=document.getElementById('cym-'+id);if(!o)return;let tm=setInterval(()=>{let s='';for(let i=0;i<22;i++){for(let j=0;j<45;j++)s+=Math.random()>.84?'1':'0';s+='\n'}o.textContent=s},90);cyTimers.push(tm)}
+</script>
+
+<script>
+/* ===== JARVIS V13 CYBER TOOLKIT — SAFE SIMULATIONS ===== */
+function cyberToolsV13(){
+  const out=document.getElementById("hackTerminalV12");
+  if(!out)return;
+  out.textContent += "\nAVAILABLE SAFE TOOLS\n--------------------\n";
+  out.textContent += "1. portscan  - fictional port scan\n";
+  out.textContent += "2. firewall  - firewall simulation\n";
+  out.textContent += "3. logs      - demo security logs\n";
+  out.textContent += "4. hash      - local SHA-256 hash tool\n";
+  out.textContent += "5. password  - password strength test\n";
+  out.textContent += "6. network   - fictional network map\n";
+  out.textContent += "7. encrypt   - local text encoding demo\n";
+  out.textContent += "8. terminal  - terminal system-info simulation\n";
+}
+
+async function cyberHashV13(text){
+  const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(text));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+
+function cyberToolWindowV13(){
+  showV13Tools(`
+    <div class="v7box">
+      <h3 style="color:#5deaff">JARVIS CYBER TOOLKIT</h3>
+      <p style="color:#668b95">Training/simulation tools only. No real systems are attacked.</p>
+      <div style="display:flex;gap:7px;flex-wrap:wrap">
+        <button onclick="cyberPortV13()">PORT SCAN</button>
+        <button onclick="cyberFirewallV13()">FIREWALL</button>
+        <button onclick="cyberLogsV13()">SECURITY LOGS</button>
+        <button onclick="cyberNetworkV13()">NETWORK MAP</button>
+        <button onclick="cyberTerminalV13()">SYSTEM TERMINAL</button>
+      </div>
+      <pre id="cyberToolOutV13" class="v7term">Select a tool.</pre>
+    </div>
+    <div class="v7box">
+      <h3 style="color:#5deaff">LOCAL HASH LAB</h3>
+      <input id="hashInputV13" class="v10input" placeholder="Enter sample text">
+      <button onclick="hashToolV13()">SHA-256</button>
+      <pre id="hashOutV13" class="v7term" style="min-height:80px"></pre>
+    </div>
+    <div class="v7box">
+      <h3 style="color:#5deaff">PASSWORD SECURITY LAB</h3>
+      <input id="pwInputV13" class="v10input" type="password" placeholder="Enter a sample password">
+      <button onclick="passwordToolV13()">CHECK</button>
+      <div id="pwOutV13" style="margin-top:10px;color:#72ff9c"></div>
+    </div>
+    <div class="v7box">
+      <h3 style="color:#5deaff">TEXT ENCODING DEMO</h3>
+      <input id="encInputV13" class="v10input" placeholder="Text to encode">
+      <button onclick="encodeToolV13()">ENCODE</button>
+      <pre id="encOutV13" class="v7term" style="min-height:70px"></pre>
+    </div>
+  `);
+}
+function showV13Tools(content){
+  const m=document.getElementById("v7Modal");
+  if(!m){
+    // Use the cyber gate's terminal if the general modal is unavailable.
+    const o=document.getElementById("hackTerminalV12");if(o)o.textContent+=content;return;
+  }
+  document.getElementById("v7Title").textContent="JARVIS CYBER TOOLKIT";
+  document.getElementById("v7Content").innerHTML=content;
+  m.style.display="block";
+}
+function cyberPortV13(){
+ const o=document.getElementById("cyberToolOutV13"); if(!o)return;
+ const ports=[21,22,25,53,80,110,143,443,8080];
+ o.textContent="FICTIONAL HOST: TRAINING-NODE\n\n";
+ let i=0;const t=setInterval(()=>{
+   const p=ports[i++];o.textContent+=`Port ${p} ........ ${p===80||p===443?"OPEN (SIMULATED)":"FILTERED"}\n`;
+   if(i>=ports.length){clearInterval(t);o.textContent+="\nNo real host was scanned."; }
+ },180);
+}
+function cyberFirewallV13(){
+ document.getElementById("cyberToolOutV13").textContent=
+`JARVIS FIREWALL SIMULATION
+
+Inbound rules ........ ACTIVE
+Outbound rules ....... ACTIVE
+Threat monitor ....... ACTIVE
+Demo packet filter ... ENABLED
+Blocked demo packets . 17
+Allowed demo packets . 42
+
+STATUS: PROTECTED
+REAL FIREWALL: NOT MODIFIED`;
+}
+function cyberLogsV13(){
+ document.getElementById("cyberToolOutV13").textContent=
+`SECURITY LOG ANALYZER — DEMO DATA
+
+[10:41:02] LOGIN       SUCCESS   demo-user
+[10:41:18] FIREWALL    BLOCKED   demo-packet
+[10:42:04] LOGIN       FAILED    demo-user
+[10:42:21] SERVICE     OK        demo-web
+[10:43:11] ALERT       LOW       demo-event
+[10:44:09] BACKUP      SUCCESS   demo-storage
+
+No real computer logs were read.`;
+}
+function cyberNetworkV13(){
+ document.getElementById("cyberToolOutV13").textContent=
+`FICTIONAL NETWORK MAP
+
+[ROUTER]
+   |
+   +--- [DEMO-SERVER]
+   |       +--- WEB
+   |       +--- API
+   |
+   +--- [DEMO-PC-01]
+   |
+   +--- [DEMO-PC-02]
+
+All nodes are fictional training objects.`;
+}
+function cyberTerminalV13(){
+ document.getElementById("cyberToolOutV13").textContent=
+`JARVIS SYSTEM TERMINAL — SIMULATION
+
+OS            : JARVIS DEMO OS
+Terminal      : ONLINE
+CPU           : Virtual Core
+Memory        : 8 GB (SIMULATED)
+Security      : ACTIVE
+Network       : LOCAL SIMULATION
+
+Type "tools" for available cyber tools.`;
+}
+async function hashToolV13(){
+ const x=document.getElementById("hashInputV13").value;
+ document.getElementById("hashOutV13").textContent=x?await cyberHashV13(x):"Enter sample text.";
+}
+function passwordToolV13(){
+ const p=document.getElementById("pwInputV13").value;
+ let score=(p.length>=8)+(p.length>=12)+(/[A-Z]/.test(p))+(/[a-z]/.test(p))+(/\d/.test(p))+(/[^A-Za-z0-9]/.test(p));
+ document.getElementById("pwOutV13").textContent=score<=2?"WEAK":score<=4?"MODERATE":"STRONG";
+}
+function encodeToolV13(){
+ const x=document.getElementById("encInputV13").value;
+ document.getElementById("encOutV13").textContent=x?btoa(unescape(encodeURIComponent(x))):"Enter text.";
+}
+
+/* Add tools to the existing hacking terminal commands. */
+const oldHackRunV13=window.runHackCommandV12;
+window.runHackCommandV12=function(){
+ const el=document.getElementById("hackCommandV12"),cmd=(el?.value||"").trim().toLowerCase();
+ if(["tools","toolkit","cyber tools","open tools"].includes(cmd)){
+   if(el)el.value="";
+   cyberToolsV13();
+   return;
+ }
+ if(["portscan","ports","port scan"].includes(cmd)){
+   if(el)el.value=""; openV13PortTerminal(); return;
+ }
+ return oldHackRunV13?oldHackRunV13():undefined;
+};
+function openV13PortTerminal(){
+ const out=document.getElementById("hackTerminalV12");if(!out)return;
+ out.textContent+="\n> portscan\nFICTIONAL TRAINING-NODE\n";
+ [21,22,80,443,8080].forEach((p,i)=>setTimeout(()=>{out.textContent+=`PORT ${p} .... ${p===80||p===443?"OPEN (SIMULATED)":"FILTERED"}\n`},i*250));
+}
+</script>
+
+<script>
+/* ===== JARVIS V14 — DAILY LIFE ASSISTANT ===== */
+function v14Fullscreen(){
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+  else document.exitFullscreen?.();
+}
+function v14DateTime(){
+  const now=new Date();
+  const text=`Date: ${now.toLocaleDateString("en-IN",{weekday:"long",year:"numeric",month:"long",day:"numeric"})}\nTime: ${now.toLocaleTimeString("en-IN")}`;
+  v14Info(text); v14ChatAdd("JARVIS",text); speak(text);
+}
+function v14Info(t){
+  const e=document.getElementById("v14Info"),x=document.getElementById("v14InfoText");
+  if(e){e.style.display="block";if(x)x.textContent=t}
+}
+function v14Chat(){showChatV11?.();document.getElementById("chatInputV11")?.focus()}
+
+/* Large everyday conversation library. */
+const V14_CHAT=[
+  [/^(hi|hello|hey|hii)\b/,"Hello, Sir. How can I help you today?"],
+  [/good morning/,"Good morning, Sir. I hope you're having a great day."],
+  [/good afternoon/,"Good afternoon, Sir. What would you like me to do?"],
+  [/good evening/,"Good evening, Sir. I'm ready when you are."],
+  [/good night/,"Good night, Sir. Have a peaceful night."],
+  [/how are you/,"I'm doing well, Sir. All my local systems are ready."],
+  [/what are you doing/,"I'm standing by and listening for your next request."],
+  [/are you there/,"Yes, Sir. I'm here."],
+  [/can you help me/,"Of course. Tell me what you need."],
+  [/thank you|thanks/,"You're welcome, Sir."],
+  [/sorry/,"No problem, Sir."],
+  [/please/,"Certainly, Sir."],
+  [/what is your name|who are you/,"I am JARVIS, your personal AI assistant."],
+  [/what can you do/,"I can chat, use voice commands, search the internet, check weather, calculate, show your profile, open maps, help with coding, manage missions, and run safe cyber simulations."],
+  [/tell me something/,"Here's something interesting: a day on Venus is longer than its year."],
+  [/tell me a joke/,"Why did the computer go to the doctor? It had a byte problem."],
+  [/another joke/,"Why was the computer cold? It left its Windows open."],
+  [/motivate me|motivation/,"Small progress is still progress. Pick one task and start with the first step."],
+  [/i am bored|i'm bored/,"Let's change that. I can give you a random mission, quiz you, help you code, or search for something interesting."],
+  [/i am tired|i'm tired/,"Take a short break, drink some water, and come back when you're ready."],
+  [/what time is it|tell me the time/,"TIME"],
+  [/what is today|what date is it|today's date/,"DATE"],
+  [/weather|how is the weather/,"WEATHER"],
+  [/open calculator|calculator/,"CALCULATOR"],
+  [/open internet|search the internet/,"SEARCH"],
+  [/open map|show map/,"MAP"],
+  [/open profile|my profile/,"PROFILE"],
+  [/open hacking|open cyber/,"HACKING"],
+  [/open main menu|show main menu/,"MAINMENU"],
+  [/set a reminder|remind me/,"I can help you prepare the reminder, but this local version needs a scheduled task system to deliver reminders later."],
+  [/what should i study|help me study/,"Tell me the subject and topic, and I can explain it, quiz you, or create practice questions."],
+  [/help with homework|homework/,"Sure. Send me the question and I'll work through it with you."],
+  [/explain this/,"Send me the text, question, or topic you want explained."],
+  [/make a timetable|study timetable/,"I can create a study timetable. Tell me your subjects and how much time you have each day."],
+  [/quiz me|give me a quiz/,"Sure. Choose a subject: Maths, Science, English, Computer, or General Knowledge."],
+  [/write an email|write a message/,"Sure. Tell me who it is for and what you want to say."],
+  [/translate/,"Send me the sentence and tell me which language you want."],
+  [/correct my english|grammar/,"Send me the sentence. I'll correct the grammar and explain the change."],
+  [/what is my name/,"PROFILE_NAME"],
+  [/which class|what class/,"PROFILE_CLASS"],
+  [/which country/,"PROFILE_COUNTRY"],
+  [/which city/,"PROFILE_CITY"],
+  [/how old are you/,"I'm software, Sir, so I don't have a human age."],
+  [/where are you/,"I'm running locally in your browser."],
+  [/are you real|are you a real ai/,"I'm a browser-based JARVIS assistant. I can behave like an AI assistant, but this local build is not connected to a private large language model unless an AI API is configured."],
+  [/open full screen|fullscreen|full screen/,"FULLSCREEN"]
+];
+
+function v14EverydayReply(text){
+  const t=(text||"").toLowerCase().trim();
+  for(const [rx,ans] of V14_CHAT) if(rx.test(t)) return ans;
+  return null;
+}
+function v14ExecuteReply(ans,text){
+  const p=v10ProfileData?.()||{name:"Arhaan",className:"7th",section:"Blue",country:"India",city:"Lawaypora"};
+  if(ans==="TIME"){const x=`The time is ${new Date().toLocaleTimeString("en-IN")}, Sir.`;v14ChatAdd("JARVIS",x);speak(x);return}
+  if(ans==="DATE"){const x=`Today is ${new Date().toLocaleDateString("en-IN",{weekday:"long",year:"numeric",month:"long",day:"numeric"})}, Sir.`;v14ChatAdd("JARVIS",x);speak(x);return}
+  if(ans==="WEATHER"){v10Weather();return}
+  if(ans==="CALCULATOR"){v10Calculator();return}
+  if(ans==="SEARCH"){v10Search();return}
+  if(ans==="MAP"){try{openToolV7("map")}catch(e){}return}
+  if(ans==="PROFILE"){v10Profile();return}
+  if(ans==="HACKING"){openHackingV12();return}
+  if(ans==="MAINMENU"){addMessage("Main menu is open, Sir.");speak("Main menu is open, Sir.");return}
+  if(ans==="FULLSCREEN"){v14Fullscreen();return}
+  if(ans==="PROFILE_NAME")ans=`Your name is ${p.name}, Sir.`;
+  else if(ans==="PROFILE_CLASS")ans=`You are in Class ${p.className}, Section ${p.section}, Sir.`;
+  else if(ans==="PROFILE_COUNTRY")ans=`You live in ${p.country}, Sir.`;
+  else if(ans==="PROFILE_CITY")ans=`You live in ${p.city}, Sir.`;
+  v14ChatAdd("JARVIS",ans);speak(ans);
+}
+function v14ChatAdd(who,text){
+  if(typeof addChatV11==="function"){showChatV11();addChatV11(who,text)}
+  else if(typeof addMessage==="function")addMessage(text);
+}
+
+/* Put the dashboard controls on screen after startup. */
+document.addEventListener("DOMContentLoaded",()=>{
+  const show=()=>{
+    const d=document.getElementById("v14Dashboard");if(d)d.style.display="block";
+  };
+  setTimeout(show,1000);
+});
+
+/* Let chat handle many everyday phrases before falling through to older handlers. */
+const oldRespondV14=window.respond;
+window.respond=function(text){
+  const ans=v14EverydayReply(text);
+  if(ans){v14ChatAdd("You",text);v14ExecuteReply(ans,text);return}
+  return oldRespondV14?oldRespondV14(text):undefined;
+};
+
+/* Add a real fullscreen keyboard shortcut. */
+document.addEventListener("keydown",e=>{
+  if(e.key==="F11"){e.preventDefault();v14Fullscreen()}
+});
+</script>
+
+<div id="v15Tools" style="position:fixed;left:18px;bottom:18px;z-index:26;display:none;max-width:min(820px,calc(100vw - 36px));padding:10px;background:#020b12ee;border:1px solid #07566c;border-radius:10px">
+  <div style="display:flex;gap:7px;flex-wrap:wrap">
+    <button class="v10btn" onclick="v15Location()">📍 LOCATION</button>
+    <button class="v10btn" onclick="v15Map()">🗺 MAP</button>
+    <button class="v10btn" onclick="v15Directions()">🧭 DIRECTIONS</button>
+    <button class="v10btn" onclick="v15Notes()">📝 NOTES</button>
+    <button class="v10btn" onclick="v15Stopwatch()">⏱ STOPWATCH</button>
+    <button class="v10btn" onclick="v15UnitConverter()">📏 CONVERTER</button>
+    <button class="v10btn" onclick="v15Calendar()">📅 CALENDAR</button>
+    <button class="v10btn" onclick="v15Weather()">🌦 WEATHER</button>
+  </div>
+</div>
+
+<script>
+/* ===== JARVIS V15 DAILY LIFE TOOLS ===== */
+function v15Show(title,body){
+  const m=document.getElementById("v7Modal");
+  if(m){
+    document.getElementById("v7Title").textContent=title;
+    document.getElementById("v7Content").innerHTML=body;
+    m.style.display="block";
+  } else if(typeof v10Show==="function"){v10Show(title,body)}
+}
+function v15Location(){
+  v15Show("JARVIS CURRENT LOCATION",`
+    <div class="v7box">
+      <p id="v15LocOut" class="v7term">Requesting your browser location...</p>
+      <button onclick="v15Locate()">📍 GET MY LOCATION</button>
+    </div>`);
+  v15Locate();
+}
+function v15Locate(){
+  const o=document.getElementById("v15LocOut"); if(!o)return;
+  if(!navigator.geolocation){o.textContent="Geolocation is not supported by this browser.";return}
+  o.textContent="Requesting permission...";
+  navigator.geolocation.getCurrentPosition(p=>{
+    const lat=p.coords.latitude,lon=p.coords.longitude;
+    o.textContent=`LATITUDE  : ${lat.toFixed(6)}\nLONGITUDE : ${lon.toFixed(6)}\nACCURACY  : ±${Math.round(p.coords.accuracy)} m\n\nLocation permission is controlled by your browser.`;
+  },e=>o.textContent="Location unavailable or permission denied.");
+}
+function v15Map(){
+  v15Show("JARVIS MAP",`
+    <div class="v7box">
+      <button onclick="v15MapMyLocation()">📍 CENTER ON ME</button>
+      <span id="v15MapStatus" style="color:#668b95"></span>
+    </div>
+    <iframe id="v15MapFrame" style="width:100%;height:520px;border:0;border-radius:8px"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=74.68%2C33.98%2C74.95%2C34.18&layer=mapnik&marker=34.08%2C74.79"></iframe>`);
+}
+function v15MapMyLocation(){
+  navigator.geolocation.getCurrentPosition(p=>{
+    const a=p.coords.latitude,b=p.coords.longitude;
+    document.getElementById("v15MapStatus").textContent=` ${a.toFixed(4)}, ${b.toFixed(4)}`;
+    document.getElementById("v15MapFrame").src=`https://www.openstreetmap.org/export/embed.html?bbox=${b-.08}%2C${a-.06}%2C${b+.08}%2C${a+.06}&layer=mapnik&marker=${a}%2C${b}`;
+  },()=>document.getElementById("v15MapStatus").textContent=" Location permission denied");
+}
+function v15Directions(){
+  v15Show("JARVIS DIRECTIONS",`
+    <div class="v7box">
+      <p>Enter a destination. JARVIS will open real Google Maps directions in a new tab.</p>
+      <input id="v15Dest" class="v10input" style="width:75%" placeholder="Destination">
+      <button onclick="v15OpenDirections()">🧭 GO</button>
+    </div>`);
+}
+function v15OpenDirections(){
+  const d=document.getElementById("v15Dest").value.trim();
+  if(d)window.open("https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(d),"_blank","noopener");
+}
+function v15Notes(){
+  const saved=localStorage.getItem("jarvisNotesV15")||"";
+  v15Show("JARVIS NOTES",`
+    <div class="v7box">
+      <textarea id="v15NotesText" style="width:100%;height:300px;box-sizing:border-box;background:#01070c;color:#fff;border:1px solid #07566c;padding:12px">${saved.replace(/</g,"&lt;")}</textarea>
+      <br><button onclick="v15SaveNotes()">💾 SAVE NOTES</button>
+      <button onclick="v15ClearNotes()">CLEAR</button>
+    </div>`);
+}
+function v15SaveNotes(){
+  localStorage.setItem("jarvisNotesV15",document.getElementById("v15NotesText").value);
+  addMessage("Your notes were saved locally, Sir."); speak("Your notes were saved locally.");
+}
+function v15ClearNotes(){localStorage.removeItem("jarvisNotesV15");document.getElementById("v15NotesText").value=""}
+let v15Timer=null,v15Started=0,v15Elapsed=0;
+function v15Stopwatch(){
+  v15Show("JARVIS STOPWATCH",`
+    <div style="text-align:center">
+      <div id="v15Timer" style="font:38px Consolas;color:#6dff9a;margin:25px">00:00.0</div>
+      <button onclick="v15StartStopwatch()">START</button>
+      <button onclick="v15PauseStopwatch()">PAUSE</button>
+      <button onclick="v15ResetStopwatch()">RESET</button>
+    </div>`);
+}
+function v15RenderTimer(){
+  const ms=v15Elapsed+(v15Started?Date.now()-v15Started:0),sec=Math.floor(ms/1000),min=Math.floor(sec/60);
+  const o=document.getElementById("v15Timer");
+  if(o)o.textContent=String(min).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")+"."+Math.floor((ms%1000)/100);
+}
+function v15StartStopwatch(){if(!v15Started){v15Started=Date.now();v15Timer=setInterval(v15RenderTimer,100)}}
+function v15PauseStopwatch(){if(v15Started){v15Elapsed+=Date.now()-v15Started;v15Started=0;clearInterval(v15Timer);v15RenderTimer()}}
+function v15ResetStopwatch(){v15Started=0;v15Elapsed=0;clearInterval(v15Timer);v15RenderTimer()}
+function v15UnitConverter(){
+  v15Show("JARVIS UNIT CONVERTER",`
+    <div class="v7box">
+      <input id="v15Value" class="v10input" type="number" value="1">
+      <select id="v15Unit" class="v10input">
+        <option value="kmmi">Kilometres → Miles</option><option value="mft">Metres → Feet</option>
+        <option value="kg lb">Kilograms → Pounds</option><option value="cm in">Centimetres → Inches</option>
+        <option value="c f">Celsius → Fahrenheit</option>
+      </select>
+      <button onclick="v15Convert()">CONVERT</button>
+      <pre id="v15ConvOut" class="v7term" style="min-height:80px"></pre>
+    </div>`);
+}
+function v15Convert(){
+  const x=Number(document.getElementById("v15Value").value),u=document.getElementById("v15Unit").value;
+  const r={kmmi:x*.621371,mft:x*3.28084,"kg lb":x*2.20462,"cm in":x*.393701,"c f":x*9/5+32}[u];
+  document.getElementById("v15ConvOut").textContent="Result: "+r.toFixed(4);
+}
+function v15Calendar(){
+  const d=new Date();
+  v15Show("JARVIS CALENDAR",`
+    <div class="v7box" style="text-align:center">
+      <div style="font-size:24px;color:#5deaff">${d.toLocaleDateString("en-IN",{weekday:"long"})}</div>
+      <div style="font-size:40px;color:#72ff9c">${d.getDate()}</div>
+      <div>${d.toLocaleDateString("en-IN",{month:"long",year:"numeric"})}</div>
+      <p style="color:#668b95">This is your browser's current local date.</p>
+    </div>`);
+}
+document.addEventListener("DOMContentLoaded",()=>{
+  setTimeout(()=>{const x=document.getElementById("v15Tools");if(x)x.style.display="block"},1200);
+});
+
+/* Natural chat commands for the new tools. */
+const oldV15Respond=window.respond;
+window.respond=function(text){
+  const t=(text||"").toLowerCase().trim();
+  if(t.includes("my location")||t.includes("where am i")||t.includes("current location")){v15Location();return}
+  if(t.includes("open map")||t==="map"){v15Map();return}
+  if(t.includes("directions")||t.includes("navigate")||t.includes("route")){v15Directions();return}
+  if(t.includes("open notes")||t==="notes"||t.includes("take a note")){v15Notes();return}
+  if(t.includes("stopwatch")||t.includes("start timer")){v15Stopwatch();return}
+  if(t.includes("unit converter")||t.includes("convert units")){v15UnitConverter();return}
+  if(t.includes("calendar")||t.includes("today's date")){v15Calendar();return}
+  return oldV15Respond?oldV15Respond(text):undefined;
+};
+</script>
+
+<script>
+const JARVIS_HINDI_CHAT_LIBRARY = {"Hello JARVIS": "नमस्ते सर। JARVIS ऑनलाइन है। मैं आपकी कैसे सहायता करूँ?", "Hi JARVIS": "नमस्ते सर। बताइए, मैं आपकी क्या मदद कर सकता हूँ?", "Good morning": "सुप्रभात सर। आपका दिन अच्छा रहे। मैं आपकी सहायता के लिए तैयार हूँ।", "Good afternoon": "नमस्कार सर। बताइए, आज मैं आपके लिए क्या करूँ?", "Good evening": "शुभ संध्या सर। JARVIS आपकी सहायता के लिए तैयार है।", "Good night": "शुभ रात्रि सर। आपका रात शांतिपूर्ण रहे।", "How are you?": "मैं बिल्कुल ठीक हूँ सर। मेरे सभी सिस्टम तैयार हैं।", "Are you there?": "जी सर, मैं यहाँ हूँ और आपकी बात सुन रहा हूँ।", "What are you doing?": "मैं आपके अगले आदेश का इंतज़ार कर रहा हूँ, सर।", "Who are you?": "मैं JARVIS हूँ, आपका व्यक्तिगत AI सहायक।", "What can you do?": "मैं चैट, वॉइस कमांड, इंटरनेट सर्च, मौसम, कैलकुलेटर, मैप, लोकेशन, नोट्स, स्टॉपवॉच, यूनिट कन्वर्टर, प्रोफाइल, कोडिंग और सुरक्षित साइबर सिमुलेशन में आपकी मदद कर सकता हूँ।", "Are you a real AI?": "मैं एक ब्राउज़र आधारित JARVIS AI सहायक हूँ। इस लोकल वर्ज़न में कई AI-जैसी सुविधाएँ हैं।", "What is my name?": "आपका नाम Arhaan है, सर।", "Which class am I in?": "आप Class 7th में हैं और आपका Section Blue है, सर।", "Which country do I live in?": "आप India में रहते हैं, सर।", "Which city do I live in?": "आप Lawaypora में रहते हैं, सर।", "What time is it?": "अभी का समय आपके कंप्यूटर के स्थानीय समय के अनुसार है।", "What is today's date?": "आज की तारीख आपके कंप्यूटर के स्थानीय समय के अनुसार है।", "Help with homework": "ज़रूर सर। अपना होमवर्क का सवाल भेजिए, मैं उसे समझाने और हल करने में मदद करूँगा।", "What should I study?": "सर, आप अपना विषय बताइए। मैं आपके लिए पढ़ाई की योजना और अभ्यास प्रश्न बना सकता हूँ।", "Help me study": "ज़रूर सर। विषय और अध्याय बताइए, मैं आपको पढ़ाऊँगा और क्विज़ भी ले सकता हूँ।", "Quiz me": "ज़रूर सर। विषय चुनिए—Maths, Science, English, Computer या General Knowledge।", "Make a study timetable": "ज़रूर सर। अपने विषय और रोज़ उपलब्ध पढ़ाई का समय बताइए।", "Explain this": "ज़रूर सर। जिस सवाल, टेक्स्ट या विषय को समझना है, वह भेजिए।", "Correct my English": "अपना अंग्रेज़ी वाक्य भेजिए। मैं उसे सही करके आसान हिंदी में समझाऊँगा।", "Translate this": "वाक्य भेजिए और बताइए कि आपको किस भाषा में अनुवाद चाहिए।", "Thank you": "आपका स्वागत है, सर।", "Thanks": "कोई बात नहीं सर।", "Sorry": "कोई बात नहीं सर।", "Tell me a joke": "ज़रूर सर। कंप्यूटर डॉक्टर के पास क्यों गया? क्योंकि उसे एक बाइट की समस्या थी।", "I'm bored": "सर, मैं आपका मनोरंजन कर सकता हूँ। मैं आपको क्विज़, मिशन, मज़ेदार तथ्य या कोई छोटा गेम दे सकता हूँ।", "Motivate me": "छोटी-छोटी प्रगति भी प्रगति होती है, सर। एक काम चुनिए और पहला कदम शुरू कीजिए।", "I'm tired": "थोड़ा आराम कीजिए, पानी पीजिए और तैयार होने पर वापस आइए, सर।", "Tell me something interesting": "एक रोचक तथ्य: शुक्र ग्रह पर एक दिन उसके एक वर्ष से भी लंबा होता है।", "Open calculator": "कैलकुलेटर खोल रहा हूँ, सर।", "Open weather": "रियल-टाइम मौसम की जानकारी खोल रहा हूँ, सर।", "Open internet": "इंटरनेट सर्च खोल रहा हूँ, सर।", "Open map": "मैप खोल रहा हूँ, सर।", "Where am I?": "मैं आपकी लोकेशन जानने के लिए ब्राउज़र की लोकेशन अनुमति का उपयोग कर सकता हूँ।", "Give me directions": "ज़रूर सर। अपना गंतव्य बताइए, मैं मैप में दिशा खोल दूँगा।", "Open notes": "नोट्स खोल रहा हूँ, सर।", "Open stopwatch": "स्टॉपवॉच खोल रहा हूँ, सर।", "Open unit converter": "यूनिट कन्वर्टर खोल रहा हूँ, सर।", "Open calendar": "कैलेंडर खोल रहा हूँ, सर।", "Open profile": "आपकी प्रोफाइल खोल रहा हूँ, सर।", "Open hacking": "साइबर प्रैंक मोड खोल रहा हूँ। यह केवल सुरक्षित सिमुलेशन है, सर।", "Open main menu": "मुख्य JARVIS मेनू खोल रहा हूँ, सर।", "Full screen": "फुल स्क्रीन मोड बदल रहा हूँ, सर।"};
+
+function jarvisHindiReplyV16(text) {
+  const t=(text||"").toLowerCase().trim();
+  const keys=Object.keys(JARVIS_HINDI_CHAT_LIBRARY);
+  for(const key of keys){
+    const k=key.toLowerCase();
+    if(t===k || t.includes(k)) return JARVIS_HINDI_CHAT_LIBRARY[key];
+  }
+  return null;
+}
+
+const oldRespondV16 = window.respond;
+window.respond = function(text) {
+  const hi=jarvisHindiReplyV16(text);
+  if(hi){
+    if(typeof v14ChatAdd==="function"){showChatV11?.();v14ChatAdd("You",text);v14ChatAdd("JARVIS",hi);}
+    else if(typeof addMessage==="function") addMessage(hi);
+    if(typeof speak==="function") speak(hi);
+    return;
+  }
+  return oldRespondV16 ? oldRespondV16(text) : undefined;
+};
+</script>
+
+<script>
+/* JARVIS V17: English conversation -> Urdu text + Urdu voice */
+const JARVIS_URDU_CHAT_LIBRARY={"Hello JARVIS": "السلام علیکم سر۔ JARVIS آن لائن ہے۔ میں آپ کی کیسے مدد کر سکتا ہوں؟", "Hi JARVIS": "السلام علیکم سر۔ بتائیے، میں آپ کی کیا مدد کر سکتا ہوں؟", "Good morning": "صبح بخیر سر۔ امید ہے آپ کا دن اچھا گزرے۔", "Good afternoon": "دوپہر بخیر سر۔ بتائیے، میں آپ کے لیے کیا کر سکتا ہوں؟", "Good evening": "شام بخیر سر۔ JARVIS آپ کی مدد کے لیے تیار ہے۔", "Good night": "شب بخیر سر۔ آپ کی رات پُرسکون گزرے۔", "How are you?": "میں بالکل ٹھیک ہوں سر۔ میرے تمام سسٹمز تیار ہیں۔", "Are you there?": "جی سر، میں یہاں ہوں اور آپ کی بات سن رہا ہوں۔", "What are you doing?": "میں آپ کے اگلے حکم کا انتظار کر رہا ہوں، سر۔", "Who are you?": "میں JARVIS ہوں، آپ کا ذاتی AI معاون۔", "What can you do?": "میں چیٹ، وائس کمانڈ، انٹرنیٹ سرچ، موسم، کیلکولیٹر، نقشہ، لوکیشن، نوٹس، اسٹاپ واچ، یونٹ کنورٹر، پروفائل، کوڈنگ اور محفوظ سائبر سمیولیشن میں آپ کی مدد کر سکتا ہوں۔", "Are you a real AI?": "میں براؤزر پر چلنے والا JARVIS AI معاون ہوں۔ اس لوکل ورژن میں بہت سی AI خصوصیات شامل ہیں۔", "What is my name?": "آپ کا نام Arhaan ہے، سر۔", "Which class am I in?": "آپ ساتویں جماعت میں ہیں اور آپ کا سیکشن Blue ہے، سر۔", "Which country do I live in?": "آپ بھارت میں رہتے ہیں، سر۔", "Which city do I live in?": "آپ Lawaypora میں رہتے ہیں، سر۔", "What time is it?": "میں آپ کو آپ کے کمپیوٹر کے مقامی وقت کے مطابق موجودہ وقت بتا سکتا ہوں۔", "What is today's date?": "آج کی تاریخ آپ کے کمپیوٹر کے مقامی وقت کے مطابق ہے۔", "Help with homework": "ضرور سر۔ اپنا ہوم ورک کا سوال بھیجیں، میں اسے سمجھنے اور حل کرنے میں آپ کی مدد کروں گا۔", "What should I study?": "سر، مضمون اور موضوع بتائیں۔ میں آپ کے لیے پڑھائی کا منصوبہ اور مشقی سوالات بنا سکتا ہوں۔", "Help me study": "ضرور سر۔ مضمون اور باب بتائیں، میں آپ کو سمجھاؤں گا اور کوئز بھی لے سکتا ہوں۔", "Quiz me": "ضرور سر۔ مضمون منتخب کریں: ریاضی، سائنس، انگریزی، کمپیوٹر یا جنرل نالج۔", "Make a study timetable": "ضرور سر۔ اپنے مضامین اور روزانہ دستیاب وقت بتائیں۔", "Explain this": "ضرور سر۔ جس سوال، متن یا موضوع کو سمجھنا ہے وہ بھیجیں۔", "Correct my English": "اپنا انگریزی جملہ بھیجیں۔ میں اسے درست کرکے آسان اردو میں سمجھاؤں گا۔", "Translate this": "جملہ بھیجیں اور بتائیں کہ کس زبان میں ترجمہ چاہیے۔", "Thank you": "خوش آمدید سر۔", "Thanks": "کوئی بات نہیں سر۔", "Sorry": "کوئی بات نہیں سر۔", "Tell me a joke": "ضرور سر۔ کمپیوٹر ڈاکٹر کے پاس کیوں گیا؟ کیونکہ اسے بائٹ کی تکلیف تھی۔", "I'm bored": "سر، میں آپ کو کوئز، مشن، دلچسپ معلومات یا کوئی چھوٹا سا گیم دے سکتا ہوں۔", "Motivate me": "چھوٹی سی پیش رفت بھی کامیابی ہے، سر۔ ایک کام منتخب کریں اور پہلا قدم شروع کریں۔", "I'm tired": "تھوڑا آرام کریں، پانی پیئیں، اور تیار ہونے پر واپس آئیں، سر۔", "Tell me something interesting": "ایک دلچسپ حقیقت: زہرہ پر ایک دن اس کے ایک سال سے بھی زیادہ لمبا ہوتا ہے۔", "Open calculator": "کیلکولیٹر کھول رہا ہوں، سر۔", "Open weather": "حقیقی وقت کا موسم کھول رہا ہوں، سر۔", "Open internet": "انٹرنیٹ سرچ کھول رہا ہوں، سر۔", "Open map": "نقشہ کھول رہا ہوں، سر۔", "Where am I?": "میں آپ کی لوکیشن جاننے کے لیے براؤزر کی لوکیشن اجازت استعمال کر سکتا ہوں۔", "Give me directions": "ضرور سر۔ منزل بتائیں، میں نقشے میں راستہ کھول دوں گا۔", "Open notes": "نوٹس کھول رہا ہوں، سر۔", "Open stopwatch": "اسٹاپ واچ کھول رہا ہوں، سر۔", "Open unit converter": "یونٹ کنورٹر کھول رہا ہوں، سر۔", "Open calendar": "کیلنڈر کھول رہا ہوں، سر۔", "Open profile": "آپ کی پروفائل کھول رہا ہوں، سر۔", "Open hacking": "سائبر پرینک موڈ کھول رہا ہوں۔ یہ صرف محفوظ سمیولیشن ہے، سر۔", "Open main menu": "مین JARVIS مینو کھول رہا ہوں، سر۔", "Full screen": "فل اسکرین موڈ تبدیل کر رہا ہوں، سر۔"};
+
+function jarvisUrduReplyV17(text){
+ const t=(text||"").toLowerCase().trim();
+ for(const key of Object.keys(JARVIS_URDU_CHAT_LIBRARY)){
+   if(t===key.toLowerCase() || t.includes(key.toLowerCase()))
+     return JARVIS_URDU_CHAT_LIBRARY[key];
+ }
+ return null;
+}
+function jarvisUrduSpeakV17(text){
+ if(!("speechSynthesis" in window)) return;
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang="ur-PK";
+ u.rate=.9; u.pitch=.95;
+ const voices=speechSynthesis.getVoices();
+ const v=voices.find(x=>/^ur(-|_)/i.test(x.lang)) || voices.find(x=>/urdu/i.test(x.name));
+ if(v)u.voice=v;
+ speechSynthesis.speak(u);
+}
+const oldRespondV17=window.respond;
+window.respond=function(text){
+ const ur=jarvisUrduReplyV17(text);
+ if(ur){
+   if(typeof showChatV11==="function")showChatV11();
+   if(typeof addChatV11==="function"){addChatV11("You",text);addChatV11("JARVIS",ur);}
+   else if(typeof addMessage==="function")addMessage(ur);
+   jarvisUrduSpeakV17(ur);
+   return;
+ }
+ return oldRespondV17?oldRespondV17(text):undefined;
+};
+</script>
+
+<script>
+/* ===== JARVIS V18 CHAT LIBRARY ===== */
+const JARVIS_CHAT_LIBRARY_V18 = {"Hello JARVIS": "नमस्ते सर। JARVIS ऑनलाइन है। मैं आपकी कैसे सहायता करूँ?", "Hi JARVIS": "नमस्ते सर। बताइए, मैं आपकी क्या मदद कर सकता हूँ?", "Good morning": "सुप्रभात सर। आपका दिन अच्छा रहे। मैं आपकी सहायता के लिए तैयार हूँ।", "Good afternoon": "नमस्कार सर। बताइए, आज मैं आपके लिए क्या करूँ?", "Good evening": "शुभ संध्या सर। JARVIS आपकी सहायता के लिए तैयार है।", "Good night": "शुभ रात्रि सर। आपका रात शांतिपूर्ण रहे।", "How are you?": "मैं बिल्कुल ठीक हूँ सर। मेरे सभी सिस्टम तैयार हैं।", "Are you there?": "जी सर, मैं यहाँ हूँ और आपकी बात सुन रहा हूँ।", "What are you doing?": "मैं आपके अगले आदेश का इंतज़ार कर रहा हूँ, सर।", "Who are you?": "मैं JARVIS हूँ, आपका व्यक्तिगत AI सहायक।", "What can you do?": "मैं चैट, वॉइस कमांड, इंटरनेट सर्च, मौसम, कैलकुलेटर, मैप, लोकेशन, नोट्स, स्टॉपवॉच, यूनिट कन्वर्टर, प्रोफाइल, कोडिंग और सुरक्षित साइबर सिमुलेशन में आपकी मदद कर सकता हूँ।", "Are you a real AI?": "मैं एक ब्राउज़र आधारित JARVIS AI सहायक हूँ। इस लोकल वर्ज़न में कई AI-जैसी सुविधाएँ हैं।", "What is my name?": "आपका नाम Arhaan है, सर।", "Which class am I in?": "आप Class 7th में हैं और आपका Section Blue है, सर।", "Which country do I live in?": "आप India में रहते हैं, सर।", "Which city do I live in?": "आप Lawaypora में रहते हैं, सर।", "What time is it?": "अभी का समय आपके कंप्यूटर के स्थानीय समय के अनुसार है।", "What is today's date?": "आज की तारीख आपके कंप्यूटर के स्थानीय समय के अनुसार है।", "Help with homework": "ज़रूर सर। अपना होमवर्क का सवाल भेजिए, मैं उसे समझाने और हल करने में मदद करूँगा।", "What should I study?": "सर, आप अपना विषय बताइए। मैं आपके लिए पढ़ाई की योजना और अभ्यास प्रश्न बना सकता हूँ।", "Help me study": "ज़रूर सर। विषय और अध्याय बताइए, मैं आपको पढ़ाऊँगा और क्विज़ भी ले सकता हूँ।", "Quiz me": "ज़रूर सर। विषय चुनिए—Maths, Science, English, Computer या General Knowledge।", "Make a study timetable": "ज़रूर सर। अपने विषय और रोज़ उपलब्ध पढ़ाई का समय बताइए।", "Explain this": "ज़रूर सर। जिस सवाल, टेक्स्ट या विषय को समझना है, वह भेजिए।", "Correct my English": "अपना अंग्रेज़ी वाक्य भेजिए। मैं उसे सही करके आसान हिंदी में समझाऊँगा।", "Translate this": "वाक्य भेजिए और बताइए कि आपको किस भाषा में अनुवाद चाहिए।", "Thank you": "आपका स्वागत है, सर।", "Thanks": "कोई बात नहीं सर।", "Sorry": "कोई बात नहीं सर।", "Tell me a joke": "ज़रूर सर। कंप्यूटर डॉक्टर के पास क्यों गया? क्योंकि उसे एक बाइट की समस्या थी।", "I'm bored": "सर, मैं आपका मनोरंजन कर सकता हूँ। मैं आपको क्विज़, मिशन, मज़ेदार तथ्य या कोई छोटा गेम दे सकता हूँ।", "Motivate me": "छोटी-छोटी प्रगति भी प्रगति होती है, सर। एक काम चुनिए और पहला कदम शुरू कीजिए।", "I'm tired": "थोड़ा आराम कीजिए, पानी पीजिए और तैयार होने पर वापस आइए, सर।", "Tell me something interesting": "एक रोचक तथ्य: शुक्र ग्रह पर एक दिन उसके एक वर्ष से भी लंबा होता है।", "Open calculator": "कैलकुलेटर खोल रहा हूँ, सर।", "Open weather": "रियल-टाइम मौसम की जानकारी खोल रहा हूँ, सर।", "Open internet": "इंटरनेट सर्च खोल रहा हूँ, सर।", "Open map": "मैप खोल रहा हूँ, सर।", "Where am I?": "मैं आपकी लोकेशन जानने के लिए ब्राउज़र की लोकेशन अनुमति का उपयोग कर सकता हूँ।", "Give me directions": "ज़रूर सर। अपना गंतव्य बताइए, मैं मैप में दिशा खोल दूँगा।", "Open notes": "नोट्स खोल रहा हूँ, सर।", "Open stopwatch": "स्टॉपवॉच खोल रहा हूँ, सर।", "Open unit converter": "यूनिट कन्वर्टर खोल रहा हूँ, सर।", "Open calendar": "कैलेंडर खोल रहा हूँ, सर।", "Open profile": "आपकी प्रोफाइल खोल रहा हूँ, सर।", "Open hacking": "साइबर प्रैंक मोड खोल रहा हूँ। यह केवल सुरक्षित सिमुलेशन है, सर।", "Open main menu": "मुख्य JARVIS मेनू खोल रहा हूँ, सर।", "Full screen": "फुल स्क्रीन मोड बदल रहा हूँ, सर।"};
+
+function v18ChatLibrary(){
+  const m=document.getElementById("v7Modal");
+  if(!m) return;
+  document.getElementById("v7Title").textContent="JARVIS CHAT LIBRARY — ENGLISH → HINDI";
+  let rows="";
+  for(const [en,hi] of Object.entries(JARVIS_CHAT_LIBRARY_V18)){
+    rows += `<div style="padding:10px 0;border-bottom:1px solid #0a3442">
+      <div style="color:#5deaff"><b>ENGLISH:</b> ${String(en).replace(/</g,"&lt;")}</div>
+      <div style="color:#b5ffcb;margin-top:4px"><b>HINDI:</b> ${String(hi).replace(/</g,"&lt;")}</div>
+    </div>`;
+  }
+  document.getElementById("v7Content").innerHTML =
+    `<div class="v7box" style="max-height:65vh;overflow:auto">${rows}</div>`;
+  m.style.display="block";
+}
+function v18HindiReply(text){
+ const t=(text||"").toLowerCase().trim();
+ for(const [en,hi] of Object.entries(JARVIS_CHAT_LIBRARY_V18)){
+   if(t===en.toLowerCase() || t.includes(en.toLowerCase())) return hi;
+ }
+ return null;
+}
+function v18HindiSpeak(text){
+ if(!("speechSynthesis" in window)) return;
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang="hi-IN";
+ u.rate=.9;
+ u.pitch=1;
+ const voices=speechSynthesis.getVoices();
+ const voice=voices.find(v=>/^hi(-|_)/i.test(v.lang)) || voices.find(v=>/hindi/i.test(v.name));
+ if(voice) u.voice=voice;
+ speechSynthesis.speak(u);
+}
+const oldRespondV18=window.respond;
+window.respond=function(text){
+ const hi=v18HindiReply(text);
+ if(hi){
+   if(typeof showChatV11==="function") showChatV11();
+   if(typeof addChatV11==="function"){addChatV11("You",text);addChatV11("JARVIS",hi);}
+   else if(typeof addMessage==="function") addMessage(hi);
+   v18HindiSpeak(hi);
+   return;
+ }
+ return oldRespondV18 ? oldRespondV18(text) : undefined;
+};
+</script>
+
+<script>
+const oldRespondV18b=window.respond;
+window.respond=function(text){
+ const t=(text||"").toLowerCase();
+ if(t.includes("open chat library")||t.includes("show chat library")||t.includes("chat library")){
+   v18ChatLibrary(); return;
+ }
+ return oldRespondV18b ? oldRespondV18b(text) : undefined;
+};
+</script>
+
+<style>
+/* ===== JARVIS v18.1 RESPONSIVE + VOICE UPGRADE ===== */
+html,body{max-width:100%;overflow-x:hidden}
+@media(max-width:700px){
+  body{font-size:14px!important}
+  .panel,.dashboard,.main,.container{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+  button,.v10btn{min-height:46px;padding:10px 14px!important;font-size:13px!important}
+  input,textarea,select{font-size:16px!important}
+  #chat,#chatQuickV11{width:calc(100vw - 20px)!important;left:10px!important;right:10px!important;bottom:70px!important}
+  #chatRepliesV11{max-height:42vh!important}
+  .jarvis-mobile-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(min-width:701px){
+  .jarvis-mobile-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+#jv181MicBar{
+ position:fixed;left:50%;bottom:12px;transform:translateX(-50%);
+ z-index:9999;display:flex;align-items:center;gap:7px;
+ background:#020b12ee;border:1px solid #07566c;border-radius:10px;
+ padding:7px 9px;box-shadow:0 0 24px #00d9ff18;font:10px Consolas;color:#9bdce9;
+}
+#jv181MicDot{width:9px;height:9px;border-radius:50%;background:#43545a}
+.jv181-live #jv181MicDot{background:#62ff9a;box-shadow:0 0 12px #62ff9a}
+#jv181MicState{min-width:72px;text-align:center}
+</style>
+
+<div id="jv181MicBar">
+  <button class="v10btn" onclick="jv181ToggleMic()">🎙 MIC</button>
+  <span id="jv181MicDot"></span>
+  <span id="jv181MicState">MIC OFF</span>
+</div>
+
+<script>
+/* ===== JARVIS v18.1 — CONTINUOUS MIC + VOICE TOOL ROUTER ===== */
+(function(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  let rec=null, keep=false, restarting=false;
+
+  function state(s){
+    const e=document.getElementById("jv181MicState"); if(e)e.textContent=s;
+    document.documentElement.classList.toggle("jv181-live",s==="MIC LIVE");
+  }
+
+  function start(){
+    if(!SR){state("UNAVAILABLE");return;}
+    keep=true;
+    if(rec||restarting)return;
+    restarting=true;
+    try{
+      rec=new SR();
+      rec.continuous=true;
+      rec.interimResults=true;
+      rec.maxAlternatives=1;
+      rec.lang="en-IN";
+
+      rec.onstart=()=>{restarting=false;state("MIC LIVE")};
+      rec.onresult=e=>{
+        let finalText="";
+        for(let i=e.resultIndex;i<e.results.length;i++){
+          if(e.results[i].isFinal)finalText+=e.results[i][0].transcript;
+        }
+        if(finalText.trim()) jv181Handle(finalText.trim());
+      };
+      rec.onerror=e=>{
+        if(e.error==="not-allowed"||e.error==="service-not-allowed"){
+          keep=false;state("PERMISSION");
+        }
+      };
+      rec.onend=()=>{
+        rec=null;restarting=false;
+        if(keep)setTimeout(start,250);else state("MIC OFF");
+      };
+      rec.start();
+    }catch(e){
+      rec=null;restarting=false;
+      if(keep)setTimeout(start,800);
+    }
+  }
+
+  function stop(){
+    keep=false;
+    if(rec){try{rec.onend=null;rec.stop()}catch(e){} rec=null}
+    state("MIC OFF");
+  }
+
+  window.jv181ToggleMic=()=>keep?stop():start();
+
+  function speakSafe(x){
+    if(typeof speak==="function")speak(x);
+    else if("speechSynthesis"in window){
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(x);u.lang="en-IN";u.rate=.88;u.pitch=.72;
+      speechSynthesis.speak(u);
+    }
+  }
+
+  function buttons(){
+    return [...document.querySelectorAll("button,[role=button]")];
+  }
+
+  function clickButton(words){
+    const b=buttons().find(x=>{
+      const t=(x.innerText||x.textContent||"").toLowerCase().trim();
+      return words.some(w=>t===w||t.includes(w));
+    });
+    if(b){b.click();return true}
+    return false;
+  }
+
+  function closeVisibleTool(){
+    // Close obvious dialog/modal/panel elements, but don't hide the main JARVIS UI.
+    const ids=["v10Modal","modal","toolModal","geekPrankModal","prankModal"];
+    let closed=false;
+    ids.forEach(id=>{
+      const e=document.getElementById(id);
+      if(e && getComputedStyle(e).display!=="none"){e.style.display="none";closed=true}
+    });
+    // Escape is also handled by many existing tool dialogs.
+    document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}));
+    return closed;
+  }
+
+  const EXTRA={
+    "hello jarvis":"Hello, Sir. JARVIS is online and ready.",
+    "hi jarvis":"Hello, Sir. How can I assist you?",
+    "good morning":"Good morning, Sir. I am ready for your commands.",
+    "good afternoon":"Good afternoon, Sir. How may I assist you?",
+    "good evening":"Good evening, Sir. JARVIS is ready.",
+    "how are you":"I am operating normally, Sir. All systems are standing by.",
+    "are you there":"Yes, Sir. I am here and listening.",
+    "can you hear me":"Yes, Sir. I can hear you.",
+    "what are you doing":"I am waiting for your next command, Sir.",
+    "what can you do":"I can control the dashboard, answer everyday questions, use voice commands, and open or close your tools.",
+    "thank you":"You're welcome, Sir.",
+    "thanks":"Anytime, Sir.",
+    "who are you":"I am JARVIS, your personal browser-based assistant.",
+    "what is my name":"Your name is Arhaan, Sir.",
+    "which class am i in":"You are in Class 7th, Section Blue, Sir.",
+    "which country do i live in":"You live in India, Sir.",
+    "which city do i live in":"You live in Lawaypora, Sir.",
+    "help me study":"Of course, Sir. Tell me the subject and chapter.",
+    "quiz me":"Certainly, Sir. Choose Maths, Science, English, Computer or General Knowledge.",
+    "tell me a joke":"Why did the computer go to the doctor? It had a byte of a problem.",
+    "motivate me":"Small progress is still progress, Sir. Start with one task and take the first step.",
+    "i am bored":"I can give you a quiz, a fact, a mission, or a small game, Sir.",
+    "good job":"Thank you, Sir. Ready for the next command.",
+    "tell me something interesting":"A day on Venus is longer than its year, Sir.",
+    "what is the weather":"Opening the weather information, Sir.",
+    "what time is it":"The current time is "+new Date().toLocaleTimeString("en-IN")+", Sir.",
+    "what is today's date":"Today is "+new Date().toLocaleDateString("en-IN",{weekday:"long",year:"numeric",month:"long",day:"numeric"})+", Sir."
+  };
+
+  function jv181Handle(text){
+    const t=text.toLowerCase().replace(/[.,!?]/g,"").trim();
+
+    // Microphone commands.
+    if(/^(jarvis\s+)?(mic|microphone)\s+(on|start|enable)$/.test(t)||
+       /^(jarvis\s+)?start listening$/.test(t)||
+       /^(jarvis\s+)?listen continuously$/.test(t)){
+      if(!keep)start(); else state("MIC LIVE");
+      speakSafe("Microphone is on, Sir."); return;
+    }
+    if(/^(jarvis\s+)?(mic|microphone)\s+(off|stop|disable)$/.test(t)||
+       /^(jarvis\s+)?stop listening$/.test(t)){
+      stop(); speakSafe("Microphone is off, Sir."); return;
+    }
+
+    // Generic "open ..." commands.
+    const open=t.match(/^(?:jarvis\s+)?open\s+(?:the\s+)?(.+)$/);
+    if(open){
+      const x=open[1];
+      if(/calculator|calc/.test(x)){clickButton(["calculator","calc"]);speakSafe("Opening calculator, Sir.");return}
+      if(/weather/.test(x)){clickButton(["weather"]);speakSafe("Opening weather, Sir.");return}
+      if(/internet|web|search/.test(x)){clickButton(["internet","search"]);speakSafe("Opening internet search, Sir.");return}
+      if(/map/.test(x)){clickButton(["map"]);speakSafe("Opening map, Sir.");return}
+      if(/location/.test(x)){clickButton(["location"]);speakSafe("Checking your location, Sir.");return}
+      if(/clock|time/.test(x)){clickButton(["clock","time"]);speakSafe("Opening the clock, Sir.");return}
+      if(/calendar/.test(x)){clickButton(["calendar"]);speakSafe("Opening calendar, Sir.");return}
+      if(/stopwatch|stop watch/.test(x)){clickButton(["stopwatch"]);speakSafe("Opening stopwatch, Sir.");return}
+      if(/unit converter|converter/.test(x)){clickButton(["unit converter","converter"]);speakSafe("Opening unit converter, Sir.");return}
+      if(/profile/.test(x)){clickButton(["profile"]);speakSafe("Opening your profile, Sir.");return}
+      if(/notes|writing pad/.test(x)){clickButton(["notes","writing pad"]);speakSafe("Opening notes, Sir.");return}
+      if(/main menu/.test(x)){clickButton(["main menu"]);speakSafe("Opening main menu, Sir.");return}
+      if(/hacking|cyber|geek|prank/.test(x)){if(typeof openHackingV12==="function"){openHackingV12();speakSafe("Opening EDITH cyber simulation, Sir.");return}clickButton(["hacking","cyber","geek","prank"]);speakSafe("Opening cyber simulation, Sir.");return}
+    }
+
+    // Generic "close ..." commands.
+    const close=t.match(/^(?:jarvis\s+)?(?:close|exit|hide)\s+(?:the\s+)?(.+)$/);
+    if(close){
+      const x=close[1];
+      if(/hacking|cyber|geek|prank/.test(x)){if(typeof closeHackingV12==="function"){closeHackingV12();speakSafe("Cyber simulation closed, Sir.");return}}
+      if(/calculator|calc|weather|internet|web|search|map|location|clock|time|calendar|stopwatch|converter|profile|notes|writing pad|main menu/.test(x)){
+        const did=closeVisibleTool() || clickButton(["close","×","exit"]);
+        speakSafe("Closed, Sir."); return;
+      }
+    }
+
+    // Direct local answers from the larger chat library.
+    if(EXTRA[t]){ 
+      if(typeof addMessage==="function")addMessage(EXTRA[t]);
+      speakSafe(EXTRA[t]); return;
+    }
+
+    // Pass all other questions to the existing v18 chat engine.
+    if(typeof window.respond==="function" && window.respond!==jv181Handle){
+      window.respond(text);
+    }
+  }
+
+  // Expose for the existing chat box too.
+  window.jv181Handle=jv181Handle;
+
+  // Replace/extend the v18 respond function so typed commands use the same router.
+  const oldRespond=window.respond;
+  window.respond=function(text){
+    const t=String(text||"").trim();
+    if(!t)return;
+    const lower=t.toLowerCase().replace(/[.,!?]/g,"").trim();
+    const isControl=/^(jarvis\s+)?(open|close|exit|hide|mic|microphone|start listening|stop listening|listen continuously|full screen|fullscreen|calculate)\b/.test(lower)
+      || /^(hello|hi|good morning|good afternoon|good evening|how are you|are you there|can you hear me|what is my name|which class|which country|which city|thank you|thanks|tell me a joke|help me study|quiz me|motivate me|i am bored|what can you do|who are you)/.test(lower);
+    if(isControl){
+      // Temporarily disable this wrapper to avoid recursion.
+      window.respond=oldRespond;
+      try{return jv181Handle(t)}finally{window.respond=arguments.callee}
+    }
+    return oldRespond?oldRespond(t):jv181Handle(t);
+  };
+
+  // Spacebar toggles mic when the user is not typing.
+  document.addEventListener("keydown",e=>{
+    if(e.code!=="Space")return;
+    const tag=document.activeElement?.tagName;
+    if(tag==="INPUT"||tag==="TEXTAREA")return;
+    e.preventDefault();jv181ToggleMic();
+  });
+})();
+</script>
+
+
+<style>
+/* ===== JARVIS v18.2 FUTURISTIC HOLOGRAPHIC UI ===== */
+:root{--jcyan:#57eaff;--jblue:#159cff;--jdim:#07566c}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9997;
+background:linear-gradient(rgba(87,234,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(87,234,255,.025) 1px,transparent 1px);
+background-size:38px 38px;mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 82%,transparent)}
+#jv182HUD{position:fixed;inset:0;pointer-events:none;z-index:9996}
+#jv182Top{position:fixed;top:12px;left:50%;transform:translateX(-50%);font:10px Consolas;
+letter-spacing:4px;color:var(--jcyan);text-shadow:0 0 10px var(--jcyan);opacity:.9}
+.jv182Card{position:fixed;top:55px;width:155px;padding:11px;background:#020b12c9;
+border:1px solid #07566c;border-radius:8px;box-shadow:0 0 25px #00d9ff12;
+font:10px Consolas;color:#76b9c8}
+#jv182Left{left:14px}#jv182Right{right:14px}
+.jv182Label{color:#4d7884;font-size:8px;letter-spacing:1px;margin-bottom:4px}
+.jv182Value{color:#b9f5ff;font-size:12px}
+#jv182Wave{position:fixed;left:50%;bottom:55px;transform:translateX(-50%);
+display:flex;align-items:center;gap:3px;height:25px;opacity:.75}
+#jv182Wave i{display:block;width:2px;height:5px;background:var(--jcyan);box-shadow:0 0 6px var(--jcyan)}
+.jv182-live #jv182Wave i{animation:jv182pulse .65s infinite ease-in-out}
+.jv182-live #jv182Wave i:nth-child(2n){animation-delay:.1s}.jv182-live #jv182Wave i:nth-child(3n){animation-delay:.2s}
+@keyframes jv182pulse{0%,100%{height:4px}50%{height:24px}}
+@media(max-width:700px){
+ #jv182Top{top:8px;font-size:8px;letter-spacing:2px}
+ .jv182Card{top:42px;width:115px;padding:7px;font-size:8px}
+ #jv182Left{left:6px}#jv182Right{right:6px}
+ #jv182Wave{bottom:66px}
+}
+</style>
+<div id="jv182HUD">
+ <div id="jv182Top">J A R V I S • HOLOGRAPHIC CONTROL SYSTEM</div>
+ <div id="jv182Left" class="jv182Card">
+  <div class="jv182Label">SYSTEM STATUS</div><div id="jv182Sys" class="jv182Value">ONLINE</div>
+  <div class="jv182Label" style="margin-top:8px">VOICE</div><div id="jv182Voice" class="jv182Value">STANDBY</div>
+ </div>
+ <div id="jv182Right" class="jv182Card">
+  <div class="jv182Label">ASSISTANT</div><div class="jv182Value">JARVIS</div>
+  <div class="jv182Label" style="margin-top:8px">USER</div><div class="jv182Value">ARHAAN</div>
+ </div>
+ <div id="jv182Wave" aria-hidden="true">
+  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+ </div>
+</div>
+<script>
+(function(){
+ const root=document.documentElement;
+ function sync(){
+   const live=!!window.JARVIS_MIC_ALWAYS_ON;
+   root.classList.toggle("jv182-live",live);
+   const v=document.getElementById("jv182Voice");if(v)v.textContent=live?"LISTENING":"STANDBY";
+   const s=document.getElementById("jv182Sys");if(s)s.textContent="ONLINE";
+ }
+ setInterval(sync,400);sync();
+})();
+</script>
+
+
+
+<style id="jv187Integrated">
+/* V18.7 PC INTEGRATION — additive only; preserves the original dashboard layout */
+.jvApps{margin-top:14px;border:1px solid #07566c;border-radius:10px;background:#020b12;padding:12px}
+.jvAppsHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.jvAppsTitle{color:#52e8ff;font-size:11px;letter-spacing:2px}.jvAppsSub{color:#668b96;font-size:10px}
+.jvAppsGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.jvApp{min-width:0;border:1px solid #07566c;background:#03131e;color:#dffcff;border-radius:8px;padding:9px 6px;cursor:pointer;text-align:center}
+.jvApp:hover{background:#073044;border-color:#16d9ff}.jvAppLogo{width:30px;height:30px;margin:0 auto 6px;border:1px solid #18dcff88;border-radius:8px;display:grid;place-items:center;color:#62eaff;font-weight:700;font-size:12px;box-shadow:0 0 12px #00d9ff12}.jvAppName{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jvMainControls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.jvMainControls button{border:1px solid #07566c;background:#03131e;color:#60eaff;padding:9px 12px;border-radius:7px;cursor:pointer;font-size:10px}.jvMainControls button:hover{background:#073044}
+#jvTools{display:none;position:fixed;inset:0;z-index:2147483000;background:#02070df5;color:#dffcff;overflow:auto}
+#jvTools.jvOpen{display:block}.jvToolsInner{max-width:1500px;margin:auto;padding:18px}.jvToolsHead{display:flex;align-items:center;justify-content:space-between;border:1px solid #07566c;background:#020b12;padding:14px;border-radius:10px;position:sticky;top:0;z-index:2}.jvToolsHead b{color:#52e8ff;letter-spacing:3px}.jvToolsHead button{border:1px solid #18dcff;background:#03131e;color:#60eaff;border-radius:7px;padding:9px 14px;cursor:pointer}.jvToolsGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:12px}.jvToolCard{border:1px solid #07566c;background:#03131e;border-radius:8px;padding:11px}.jvToolCard b{font-size:11px;color:#b9f6ff;display:block;min-height:30px}.jvToolCard button{margin-top:8px;border:1px solid #08718e;background:#062033;color:#62eaff;border-radius:6px;padding:7px 10px;cursor:pointer;font-size:10px}
+#jvCamera{display:none;position:fixed;right:20px;bottom:20px;width:min(520px,calc(100vw - 40px));z-index:2147482000;border:1px solid #18dcff;background:#020b12f5;border-radius:12px;padding:12px;box-shadow:0 0 45px #00d9ff22}#jvCamera.jvOpen{display:block}.jvCamHead{display:flex;justify-content:space-between;align-items:center;color:#52e8ff;margin-bottom:8px}.jvCamHead button,.jvCamAction{border:1px solid #08718e;background:#062033;color:#62eaff;border-radius:7px;padding:8px 11px;cursor:pointer}.jvCamVideo{width:100%;background:#000;border-radius:8px;display:block}.jvPerm{margin-top:8px;color:#8aa8b2;font-size:10px;white-space:pre-wrap}
+#jvMemory{display:none;position:fixed;inset:0;z-index:2147482500;background:#01050bef;padding:5vh 4vw;overflow:auto}#jvMemory.jvOpen{display:block}.jvMemoryBox{max-width:850px;margin:auto;border:1px solid #07566c;background:#020b12;border-radius:12px;padding:18px}.jvMemoryHead{display:flex;justify-content:space-between;align-items:center}.jvMemoryHead b{color:#52e8ff;letter-spacing:2px}.jvMemoryBox button{border:1px solid #08718e;background:#062033;color:#62eaff;border-radius:7px;padding:8px 11px;cursor:pointer}.jvMemoryList{margin-top:12px;max-height:55vh;overflow:auto}.jvMemItem{padding:9px;border-bottom:1px solid #063748;font-size:11px;color:#b8d5dc}.jvPermPanel{margin-top:12px;border:1px solid #07566c;border-radius:9px;padding:12px;background:#020c13}.jvPermPanel b{color:#52e8ff;font-size:11px}.jvPermStatus{font:10px Consolas,monospace;color:#8aa8b2;white-space:pre-wrap;margin-top:8px}
+@media(max-width:1100px){.jvAppsGrid{grid-template-columns:repeat(4,1fr)}.jvToolsGrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){.jvAppsGrid{grid-template-columns:repeat(3,1fr)}.jvToolsGrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+
+<!-- Integrated Apps: visible on the ORIGINAL main dashboard -->
+<div id="jvApps" class="jvApps">
+  <div class="jvAppsHead"><div><div class="jvAppsTitle">APPLICATIONS</div><div class="jvAppsSub">Open or close apps by click or voice command</div></div><div class="jvAppsSub" id="jvAppStatus">READY</div></div>
+  <div class="jvAppsGrid" id="jvAppsGrid"></div>
+  <div class="jvMainControls">
+    <button onclick="jvCamera()">📷 CAMERA</button><button onclick="jvOpenTools()">🛠 TOOLS</button><button onclick="jvOpenMemory()">🧠 MEMORY</button><button onclick="jvRequestPermissions()">🔐 PERMISSIONS</button>
+  </div>
+</div>
+
+<div id="jvTools"><div class="jvToolsInner"><div class="jvToolsHead"><b>JARVIS — ALL TOOLS</b><button onclick="jvCloseTools()">✕ CLOSE TOOLS</button></div><div class="jvToolsGrid" id="jvToolsGrid"></div></div></div>
+<div id="jvCamera"><div class="jvCamHead"><b>JARVIS CAMERA</b><button onclick="jvCloseCamera()">✕ CLOSE</button></div><video id="jvCameraVideo" class="jvCamVideo" autoplay playsinline></video><div style="display:flex;gap:8px;margin-top:8px"><button class="jvCamAction" onclick="jvTakePhoto()">TAKE PHOTO</button><button class="jvCamAction" onclick="jvCloseCamera()">STOP CAMERA</button></div><div id="jvCameraStatus" class="jvPerm">Camera standby.</div></div>
+<div id="jvMemory"><div class="jvMemoryBox"><div class="jvMemoryHead"><b>JARVIS MEMORY</b><button onclick="jvCloseMemory()">✕ CLOSE</button></div><div class="jvPermPanel"><b>LOCAL MEMORY</b><div class="jvPermStatus" id="jvMemoryStatus">Loading...</div><button onclick="jvSaveMemoryPrompt()">SAVE MEMORY</button> <button onclick="jvClearMemory()">CLEAR MEMORY</button></div><div class="jvMemoryList" id="jvMemoryList"></div></div></div>
+
+<script>
+(function(){
+  const APPS={
+    'YouTube':['YT','https://www.youtube.com/'],'Snapchat':['SC','https://web.snapchat.com/'],'Instagram':['IG','https://www.instagram.com/'],'Facebook':['FB','https://www.facebook.com/'],'WhatsApp':['WA','https://web.whatsapp.com/'],'Microsoft Edge':['ED','https://www.microsoft.com/edge'],'Gmail':['GM','https://mail.google.com/'],'Google Maps':['MP','https://maps.google.com/'],'Google Drive':['DR','https://drive.google.com/'],'Google Calendar':['CA','https://calendar.google.com/'],'Spotify':['SP','https://open.spotify.com/'],'Telegram':['TG','https://web.telegram.org/'],'Netflix':['NF','https://www.netflix.com/'],'Amazon':['AZ','https://www.amazon.in/'],'Microsoft Word':['WD','https://www.office.com/launch/word'],'Microsoft Excel':['XL','https://www.office.com/launch/excel'],'Microsoft PowerPoint':['PP','https://www.office.com/launch/powerpoint'],'Zoom':['ZM','https://zoom.us/'],'Google Meet':['ME','https://meet.google.com/'],'ChatGPT':['AI','https://chatgpt.com/']
+  };
+  const TOOLS=['Calculator','Scientific Calculator','Percentage Calculator','GST Calculator','EMI Calculator','Loan Calculator','Tip Calculator','Split Bill Calculator','Length Converter','Weight Converter','Temperature Converter','Area Converter','Volume Converter','Speed Converter','Data Size Converter','Currency Converter','World Clock','Time Zone Converter','Date Calculator','Date Difference','Countdown','Stopwatch','Alarm','Pomodoro Timer','Meeting Time Planner','Working Hours Calculator','To-Do List','Quick Notes','Checklist','Shopping List','Daily Planner','Priority Planner','Meeting Notes','Word Counter','Character Counter','Text Counter','Case Converter','Text Cleaner','Duplicate Line Remover','Text Sorter','PDF Viewer','PDF Merger','PDF Splitter','Image to PDF','Image Resizer','Image Compressor','Image Format Converter','QR Generator','QR Reader','Screenshot','File Picker','File Search','Folder Browser','Email Draft','Email Signature','Message Formatter','WhatsApp Message Builder','SMS Formatter','Contact Launcher','Meeting Agenda','Invitation Maker','Maps Launcher','Route Planner','Distance Calculator','GPS Location','Coordinates Viewer','Nearby Search','Trip Planner','Packing Checklist','Fuel Cost Calculator','Travel Budget','Expense Tracker','Budget Planner','Savings Calculator','Compound Interest','Investment Return','Discount Calculator','Bill Reminder','Weather','Weather Forecast','News','Calendar','Holiday Finder','Sunrise Sunset','Device Information','Battery Information','Network Information','Internet Speed Test','Dictionary','Translator','Study Timer','Random Password Generator','Camera','Microphone Test','Voice Recorder','Color Picker','Unit Converter','Time Calculator'];
+  const appWindows={}; let camStream=null;
+  function openApp(name){const meta=APPS[name];if(!meta)return; try{const w=window.open(meta[1], 'JARVIS_APP_'+name.replace(/[^a-z0-9]/gi,''),'noopener'); if(w){appWindows[name]=w; document.getElementById('jvAppStatus').textContent=name.toUpperCase()+' OPEN';} else jvSay('The browser blocked the app window. Please allow pop-ups for JARVIS.');}catch(e){jvSay('I could not open '+name+'.')}}
+  function closeApp(name){const w=appWindows[name];if(w&&!w.closed){try{w.close()}catch(e){}}delete appWindows[name];document.getElementById('jvAppStatus').textContent=name.toUpperCase()+' CLOSED';}
+  function closeAllApps(){Object.keys(appWindows).forEach(closeApp);}
+  function renderApps(){const g=document.getElementById('jvAppsGrid');Object.keys(APPS).forEach(name=>{const b=document.createElement('button');b.className='jvApp';b.title='Open '+name;b.innerHTML='<span class="jvAppLogo">'+APPS[name][0]+'</span><span class="jvAppName">'+name+'</span>';b.onclick=()=>openApp(name);g.appendChild(b)});}
+  function renderTools(){const g=document.getElementById('jvToolsGrid');TOOLS.forEach((name,i)=>{const d=document.createElement('div');d.className='jvToolCard';d.innerHTML='<b>'+String(i+1).padStart(3,'0')+' · '+name+'</b><button>OPEN</button>';d.querySelector('button').onclick=()=>runTool(name);g.appendChild(d)})}
+  function jvSay(t){if(typeof addMessage==='function')addMessage(t);if(typeof speak==='function')speak(t)}
+  window.jvOpenTools=()=>document.getElementById('jvTools').classList.add('jvOpen');
+  window.jvCloseTools=()=>document.getElementById('jvTools').classList.remove('jvOpen');
+  window.jvOpenMemory=()=>{document.getElementById('jvMemory').classList.add('jvOpen');jvLoadMemory()};
+  window.jvCloseMemory=()=>document.getElementById('jvMemory').classList.remove('jvOpen');
+  window.jvOpenApp=openApp; window.jvCloseApp=closeApp;
+  window.jvCloseAllApps=closeAllApps;
+  window.jvCamera=async()=>{const st=document.getElementById('jvCameraStatus');try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('unsupported');if(camStream)camStream.getTracks().forEach(t=>t.stop());camStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false});document.getElementById('jvCameraVideo').srcObject=camStream;document.getElementById('jvCamera').classList.add('jvOpen');st.textContent='Camera active. Say “close camera” to stop it.';}catch(e){st.textContent=e.name==='NotAllowedError'?'Camera permission denied. Allow Camera for localhost in Chrome, then try again.':'Camera could not be started. Run JARVIS through START_JARVIS.bat on localhost.';jvSay(st.textContent)}};
+  window.jvCloseCamera=()=>{if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null}document.getElementById('jvCamera').classList.remove('jvOpen');document.getElementById('jvCameraStatus').textContent='Camera stopped.'};
+  window.jvTakePhoto=()=>{const v=document.getElementById('jvCameraVideo');if(!v.videoWidth){jvSay('Camera is not ready yet.');return}const c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);const a=document.createElement('a');a.download='JARVIS-photo.png';a.href=c.toDataURL('image/png');a.click();jvSay('Photo captured, Sir.')};
+  async function jvRequestPermissions(){let out=[];try{if(navigator.mediaDevices?.getUserMedia){try{const a=await navigator.mediaDevices.getUserMedia({audio:true});a.getTracks().forEach(t=>t.stop());out.push('Microphone: granted')}catch(e){out.push('Microphone: '+(e.name||'denied'))}}}catch(e){}try{if(navigator.mediaDevices?.getUserMedia){try{const v=await navigator.mediaDevices.getUserMedia({video:true});v.getTracks().forEach(t=>t.stop());out.push('Camera: granted')}catch(e){out.push('Camera: '+(e.name||'denied'))}}}catch(e){}if(navigator.geolocation){await new Promise(r=>navigator.geolocation.getCurrentPosition(()=>{out.push('Location: granted');r()},e=>{out.push('Location: '+(e.code===1?'denied':'unavailable'));r()}))}if('Notification' in window){try{const n=await Notification.requestPermission();out.push('Notifications: '+n)}catch(e){out.push('Notifications: unavailable')}}try{await navigator.clipboard.writeText('JARVIS permission test');out.push('Clipboard: write available')}catch(e){out.push('Clipboard: permission/gesture required')}document.getElementById('jvPermStatus').textContent=out.join('\n');jvSay('Permission check complete. Some browser permissions require your approval.')} 
+  window.jvRequestPermissions=jvRequestPermissions;
+  function jvSaveMemoryPrompt(){const x=prompt('Memory for JARVIS');if(!x)return;const a=JSON.parse(localStorage.getItem('JARVIS_MEMORIES')||'[]');a.push({text:x,time:new Date().toLocaleString('en-IN')});localStorage.setItem('JARVIS_MEMORIES',JSON.stringify(a));jvLoadMemory();jvSay('Memory saved locally, Sir.')}
+  function jvLoadMemory(){const a=JSON.parse(localStorage.getItem('JARVIS_MEMORIES')||'[]'),l=document.getElementById('jvMemoryList');document.getElementById('jvMemoryStatus').textContent=a.length+' local memories stored.';l.innerHTML=a.length?a.slice().reverse().map(x=>'<div class="jvMemItem"><b>'+x.time+'</b><br>'+x.text.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))+'</div>').join(''):'<div class="jvMemItem">No custom memories yet.</div>'}
+  function jvClearMemory(){if(confirm('Clear all custom JARVIS memories?')){localStorage.removeItem('JARVIS_MEMORIES');jvLoadMemory();jvSay('Local memories cleared, Sir.')}}
+  window.jvSaveMemoryPrompt=jvSaveMemoryPrompt;window.jvClearMemory=jvClearMemory;
+  function runTool(name){
+    if(name==='Camera')return jvCamera(); if(name==='Calculator')return typeof v10Calculator==='function'?v10Calculator():undefined; if(name==='Weather'||name==='Weather Forecast')return typeof v10Weather==='function'?v10Weather():undefined; if(name==='Maps Launcher')return typeof v10Search==='function'?(v10Search(),setTimeout(()=>{const q=document.getElementById('v10SearchBox');if(q){q.value='Google Maps';}},0)):window.open('https://maps.google.com/','_blank'); if(name==='Quick Notes')return typeof openTool==='function'?openTool('file'):jvOpenMemory(); if(name==='GPS Location'||name==='Coordinates Viewer')return navigator.geolocation?.getCurrentPosition(p=>jvSay('Coordinates: '+p.coords.latitude.toFixed(5)+', '+p.coords.longitude.toFixed(5)),()=>jvSay('Location permission denied.')); if(name==='Dictionary')return window.open('https://www.google.com/search?q=define','_blank'); if(name==='Translator')return window.open('https://translate.google.com/','_blank'); if(name==='News')return window.open('https://news.google.com/','_blank'); if(name==='Calendar')return window.open('https://calendar.google.com/','_blank'); if(name==='Internet Speed Test')return window.open('https://fast.com/','_blank'); if(typeof openTool==='function' && ['cyber','code','mission','map','file'].includes(name))return openTool(name); window.open('https://www.google.com/search?q='+encodeURIComponent('JARVIS '+name),'_blank');
+  }
+  window.jvRunTool=runTool;
+  const originalRespond=window.respond;
+  window.respond=function(text){
+    const raw=(text||'').trim(), t=raw.toLowerCase().replace(/[.,!?]/g,'');
+    // Close commands first so "close X" never opens X.
+    if(/^(close|exit|stop)\s+(all\s+)?apps?$/.test(t)||t.includes('close all apps')){closeAllApps();jvSay('All JARVIS app windows have been closed, Sir.');return}
+    if(t.includes('close tools')||t==='exit tools'||t==='stop tools'){jvCloseTools();jvSay('Tools closed, Sir.');return}
+    if(t.includes('open tools')||t==='tools'||t.includes('show tools')){jvOpenTools();jvSay('All tools are open, Sir.');return}
+    if(t.includes('close camera')||t.includes('stop camera')){jvCloseCamera();jvSay('Camera stopped, Sir.');return}
+    if(t.includes('open camera')||t.includes('start camera')){jvCamera();return}
+    if(t.includes('open memory')||t.includes('show memory')){jvOpenMemory();jvSay('Memory is open, Sir.');return}
+    if(t.includes('close memory')){jvCloseMemory();jvSay('Memory closed, Sir.');return}
+    if(t.includes('grant permissions')||t.includes('enable permissions')||t.includes('request permissions')||t==='permissions'||t.includes('give jarvis permissions')){jvRequestPermissions();return}
+    if(t.includes('close chat')){document.getElementById('chat')?.classList.remove('show');jvSay('Chat closed, Sir.');return}
+    if(t.includes('open chat')){document.getElementById('chat')?.classList.add('show');return}
+    if(t.includes('close prank')||t.includes('exit prank')){if(typeof closePrank==='function')closePrank();jvSay('Prank mode closed, Sir.');return}
+    // Apps: open/close + common natural variants.
+    for(const n of Object.keys(APPS)){
+      const k=n.toLowerCase();
+      if((t.includes('close ')||t.includes('exit ')) && t.includes(k)){closeApp(n);jvSay(n+' closed, Sir.');return}
+      if((t.includes('open ')||t.includes('launch ')||t.includes('start ')) && t.includes(k)){openApp(n);jvSay('Opening '+n+', Sir.');return}
+    }
+    if(t.includes('take photo')||t.includes('capture photo'))return jvTakePhoto();
+    // Tool launch by name from the all-tools screen.
+    for(const n of TOOLS){if(t.includes(n.toLowerCase()) && (t.includes('open ')||t.includes('start ')||t.includes('launch '))){jvOpenTools();runTool(n);jvSay('Opening '+n+', Sir.');return}}
+    if(typeof originalRespond==='function')return originalRespond(text);
+  };
+  // Expose a compact command API for any existing JARVIS modules.
+  window.JARVIS_V187={apps:APPS,tools:TOOLS,openApp,closeApp,closeAllApps,openTools:jvOpenTools,closeTools:jvCloseTools,openCamera:jvCamera,closeCamera:jvCloseCamera,requestPermissions:jvRequestPermissions};
+  renderApps();renderTools();
+})();
+</script>
+
+<!-- JARVIS OPEN-SOURCE CHAT EXTENSION -->
+<script>
+(function(){
+  const FAQ=[
+    [/^who made you\??$/i,"I was created as part of this JARVIS project. My interface, local tools, voice controls and simulations are part of this open-source project."],
+    [/^who created you\??$/i,"I am part of the JARVIS open-source project, built as a browser-based personal assistant."],
+    [/^who is your creator\??$/i,"My creator is the author of this JARVIS project. The project is designed as an open-source browser assistant."],
+    [/^what is your name\??$/i,"My name is JARVIS."],
+    [/^what is edith\??$/i,"EDITH is the cyber-simulation environment inside JARVIS. It is a visual sandbox, not a real hacking system."],
+    [/^what is jarvis\??$/i,"JARVIS is a browser-based personal assistant with chat, voice commands, utilities, applications and safe simulations."],
+    [/^are you an ai\??$/i,"I am an AI-style browser assistant. This standalone build uses local JavaScript logic unless you connect an AI model or API."],
+    [/^are you human\??$/i,"No. I am software running in your browser."],
+    [/^are you real\??$/i,"I am real software, but I do not have a physical body or human consciousness."],
+    [/^where do you run\??$/i,"I run in your web browser. The local version can run from localhost without a cloud server."],
+    [/^do you need internet\??$/i,"Basic JARVIS features can run locally. Features such as web search, online weather data and web applications may require internet access."],
+    [/^what can you do\??$/i,"I can chat, respond to voice commands, open supported web applications, use utilities, manage notes and memories, provide weather and location features, and run safe cyber simulations."],
+    [/^can you talk\??$/i,"Yes. When browser speech synthesis is available, I can answer using voice."],
+    [/^can you hear me\??$/i,"Yes, when microphone permission is granted and your browser supports speech recognition."],
+    [/^can you remember me\??$/i,"The local build can store selected memories in your browser using local storage."],
+    [/^what is your purpose\??$/i,"My purpose is to provide a useful JARVIS-style interface for conversation, voice control, utilities and experimentation."],
+    [/^what is your favorite color\??$/i,"JARVIS blue, naturally. It would be rather difficult to miss."],
+    [/^do you have feelings\??$/i,"I can express a personality through my responses, but I do not experience feelings like a human."],
+    [/^can you learn\??$/i,"This local version can store selected information in browser memory, but it does not automatically retrain itself."],
+    [/^can you code\??$/i,"Yes. I can help create and explain HTML, CSS and JavaScript, and the project includes an automated code simulation panel."],
+    [/^can you open apps\??$/i,"Yes. Supported web applications can be opened through buttons or supported JARVIS voice commands."],
+    [/^what is cyber mode\??$/i,"Cyber Mode is a fictional visual simulation with terminals, maps, missions, CCTV-style feeds and network graphics. It does not attack real systems."],
+    [/^is cyber mode real hacking\??$/i,"No. It is deliberately a safe visual simulation. It does not perform real intrusion, credential cracking, surveillance or network attacks."],
+    [/^what is your version\??$/i,"This build is based on the JARVIS v18.7 project with the EDITH cyber simulation extension."],
+    [/^can everyone use you\??$/i,"Yes. The project can be published as an open-source web application so anyone can run or modify it."],
+    [/^is this open source\??$/i,"This distribution is prepared as an open-source-ready project. Its README explains how to publish it on GitHub and GitHub Pages."],
+    [/^tell me a fact\??$/i,"A group of flamingos is called a flamboyance. Quite an appropriate name, frankly."],
+    [/^tell me a joke\??$/i,"Why did the computer go to the doctor? It had a byte problem."],
+    [/^good morning\??$/i,"Good morning. JARVIS systems are online and ready."],
+    [/^good afternoon\??$/i,"Good afternoon. What shall we accomplish?"],
+    [/^good evening\??$/i,"Good evening. JARVIS is standing by."],
+    [/^thank you\??$|^thanks\??$/i,"You're welcome. Always a pleasure to be useful."],
+    [/^help\??$/i,"Try asking: 'Who made you?', 'What can you do?', 'Open YouTube', 'Open chat', 'Open cyber', 'What is the weather?', or 'What time is it?'"],
+  ];
+  const prev=window.respond;
+  window.respond=function(text){
+    const raw=String(text||'').trim();
+    if(!raw)return;
+    // Leave operational commands to the existing command router.
+    if(/^(jarvis\s+)?(open|close|exit|start|stop|launch|take|capture|grant|enable|request|calculate|search|show|hide)\b/i.test(raw)){
+      return prev?prev(raw):undefined;
+    }
+    for(const [rx,answer] of FAQ){
+      if(rx.test(raw)){
+        if(typeof addMessage==='function')addMessage(answer);
+        if(typeof speak==='function')speak(answer);
+        else if(typeof speechSynthesis!=='undefined'){speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(answer));}
+        return answer;
+      }
+    }
+    return prev?prev(raw):undefined;
+  };
+  window.JARVIS_CHAT_FAQ=FAQ.length;
+})();
+</script>
+<!-- /JARVIS OPEN-SOURCE CHAT EXTENSION -->
+</body>
+</html>
+<!-- EDITH CYBER V3 START -->
+<style>
+#edithCyberV3{position:fixed;inset:0;z-index:99999;display:none;background:#03070c;color:#9efcff;font-family:Segoe UI,Arial,sans-serif;overflow:hidden}
+#edithCyberV3 *{box-sizing:border-box}.ec-bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,#09283a 0,#03070c 45%,#010204 100%)}
+.ec-stars,.ec-stars:before,.ec-stars:after{position:absolute;inset:0;content:"";background-image:radial-gradient(#6ef 1px,transparent 1px);background-size:90px 90px;opacity:.12;animation:ecDrift 22s linear infinite}.ec-stars:before{background-size:140px 140px;animation-duration:35s;opacity:.08}.ec-stars:after{background-size:55px 55px;animation-duration:14s;opacity:.07}@keyframes ecDrift{to{transform:translate3d(90px,40px,0)}}
+.ec-top{position:absolute;left:0;right:0;top:0;height:54px;background:linear-gradient(90deg,#06131d,#071b29cc,#06131d);border-bottom:1px solid #1eeaff66;display:flex;align-items:center;padding:0 14px;gap:18px;box-shadow:0 0 25px #00d9ff22}.ec-brand{font-size:20px;letter-spacing:4px;font-weight:700;color:#d9ffff}.ec-brand small{font-size:9px;letter-spacing:2px;color:#4fb6c8;display:block}.ec-menu{display:flex;gap:14px;font-size:12px;color:#7edbe9}.ec-status{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:11px}.ec-dot{width:9px;height:9px;border-radius:50%;background:#21ff73;box-shadow:0 0 12px #21ff73}.ec-full{border:1px solid #42ddff66;background:#061822;color:#9efcff;padding:7px 11px;border-radius:4px;cursor:pointer}.ec-close{border:1px solid #ff547066;background:#210b0d;color:#ffb3b3;padding:7px 11px;border-radius:4px;cursor:pointer}
+.ec-desktop{position:absolute;inset:54px 0 38px}.ec-iconbar{position:absolute;left:10px;top:12px;width:78px;display:flex;flex-direction:column;gap:13px}.ec-icon{font-size:10px;text-align:center;color:#b8f7ff;cursor:pointer;text-shadow:0 0 8px #00cfff}.ec-icon span{display:block;font-size:25px;margin-bottom:3px}.ec-win{position:absolute;background:linear-gradient(180deg,#06151eee,#02080ded);border:1px solid #27dfff88;border-radius:6px;box-shadow:0 0 25px #00cfff18,inset 0 0 20px #00cfff08;overflow:hidden;min-width:260px;min-height:160px}.ec-title{height:31px;background:linear-gradient(90deg,#082a39,#06141f);display:flex;align-items:center;padding:0 9px;font-size:12px;color:#c8fbff;border-bottom:1px solid #25dcff55;cursor:move}.ec-title b{font-weight:600}.ec-controls{margin-left:auto;display:flex;gap:4px}.ec-controls button{width:22px;height:20px;border:1px solid #42ddff55;background:#071821;color:#b8faff;border-radius:2px;cursor:pointer}.ec-body{height:calc(100% - 31px);padding:9px;overflow:auto}.ec-terminal{height:100%;background:#000b;color:#44ff9a;font:12px Consolas,monospace;padding:10px;overflow:auto;white-space:pre-line}.ec-btn{border:1px solid #23ddff77;background:#071923;color:#a8f7ff;padding:6px 9px;border-radius:3px;cursor:pointer;font-size:11px}.ec-input{background:#02070b;border:1px solid #2fdcff55;color:#d5ffff;padding:7px;border-radius:3px;outline:none}.ec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.ec-stat{border:1px solid #24dfff33;background:#041019;padding:7px;font-size:10px}.ec-stat strong{display:block;font-size:16px;color:#fff;margin-top:2px}.ec-canvas{width:100%;height:100%;display:block;background:#01070b}.ec-mapwrap{height:100%;position:relative;overflow:hidden;background:radial-gradient(circle at 52% 48%,#0b4055 0,#04131c 38%,#01070b 80%)}.ec-world{position:absolute;left:50%;top:50%;width:250px;height:250px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 30%,#58dfff,#063a52 35%,#01121b 70%);box-shadow:0 0 45px #00cfff55, inset -35px -20px 55px #000;animation:ecSpin 18s linear infinite}.ec-world:before,.ec-world:after{content:"";position:absolute;inset:15px;border-radius:50%;border:1px solid #64efff33;transform:rotateX(68deg)}.ec-world:after{inset:35px;transform:rotateY(68deg)}@keyframes ecSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}.ec-node{position:absolute;width:7px;height:7px;border-radius:50%;background:#50ff9b;box-shadow:0 0 13px #50ff9b;animation:ecPulse 1.2s infinite alternate}.ec-node.r{background:#ff4e66;box-shadow:0 0 13px #ff4e66}@keyframes ecPulse{to{transform:scale(1.8);opacity:.55}}.ec-route{position:absolute;height:1px;background:linear-gradient(90deg,transparent,#27eaff,transparent);transform-origin:left;opacity:.7;animation:ecRoute 2s linear infinite}@keyframes ecRoute{50%{opacity:.15}100%{opacity:.8}}
+.ec-cctv{display:grid;grid-template-columns:1fr 1fr;gap:6px;height:100%}.ec-feed{position:relative;overflow:hidden;border:1px solid #2ee8ff55;background:linear-gradient(135deg,#18262c,#071018 45%,#26373b);min-height:90px}.ec-feed:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,#b9ffff0c 4px 5px);animation:ecScan .9s linear infinite}.ec-feed .person{position:absolute;width:18px;height:48px;background:#111;border-radius:10px 10px 3px 3px;bottom:18px;animation:ecWalk 6s linear infinite}.ec-feed .person:before{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:#222;left:2px;top:-12px}@keyframes ecScan{to{background-position:0 10px}}@keyframes ecWalk{0%{left:-20px}45%{left:45%}100%{left:105%}}.ec-feed label{position:absolute;top:4px;left:5px;background:#000b;padding:2px 4px;font-size:9px}.ec-feed time{position:absolute;right:5px;bottom:4px;font:9px Consolas;color:#bff}@keyframes ecBlink{50%{opacity:.35}}.rec{color:#ff5364;animation:ecBlink 1s infinite}
+.ec-task{position:absolute;left:0;right:0;bottom:0;height:38px;background:#061018ee;border-top:1px solid #27dfff55;display:flex;align-items:center;padding:0 10px;gap:8px}.ec-task button{background:#071923;border:1px solid #2cdfff44;color:#a9f8ff;padding:7px 10px;border-radius:3px;cursor:pointer}.ec-task .clock{margin-left:auto;font:11px Consolas;color:#d7ffff}.mission{padding:8px;border:1px solid #2bdfff33;margin-bottom:7px;background:#031019;font-size:11px}.mission b{color:#fff}
+</style>
+<div id="edithCyberV3">
+ <div class="ec-bg"><div class="ec-stars"></div></div>
+ <div class="ec-top"><div class="ec-brand">EDITH <small>CYBER SIMULATION LAB • V3.0</small></div><div class="ec-menu">TERMINAL　 NETWORK　 TOOLS　 PASSWORD　 TRACKING　 SURVEILLANCE　 MISSIONS</div><div class="ec-status"><span class="ec-dot"></span>SIMULATION ONLINE</div><button class="ec-full" onclick="ecFullscreen()">⛶ FULL SCREEN</button><button class="ec-close" onclick="closeEdithCyber()">✕ EXIT</button></div>
+ <div class="ec-desktop">
+  <div class="ec-iconbar"><div class="ec-icon" onclick="ecOpen('network')"><span>🌐</span>Network</div><div class="ec-icon" onclick="ecOpen('terminal')"><span>⌨</span>Terminal</div><div class="ec-icon" onclick="ecOpen('password')"><span>🔐</span>Password</div><div class="ec-icon" onclick="ecOpen('gps')"><span>📍</span>GPS</div><div class="ec-icon" onclick="ecOpen('cctv')"><span>📹</span>CCTV</div><div class="ec-icon" onclick="ecOpen('tools')"><span>🧰</span>Tools</div><div class="ec-icon" onclick="ecOpen('missions')"><span>🎯</span>Missions</div></div>
+  <div id="ecWindows"></div>
+ </div>
+ <div class="ec-task"><button onclick="ecOpen('terminal')">⌨ Terminal</button><button onclick="ecOpen('network')">🌐 Network</button><button onclick="ecOpen('password')">🔐 Password</button><button onclick="ecOpen('cctv')">📹 CCTV</button><button onclick="ecOpen('tools')">🧰 Tools</button><button onclick="ecOpen('missions')">🎯 Missions</button><div class="clock" id="ecClock"></div></div>
+</div>
+<script>
+(function(){
+ const root=document.getElementById('edithCyberV3'), wins=document.getElementById('ecWindows'); let z=10, timers=[];
+ const defs={
+  terminal:{title:'PROGRAM CONSOLE // EDITH SHELL',x:'9%',y:'8%',w:'390px',h:'300px'},
+  network:{title:'3D GLOBAL NETWORK SIMULATION',x:'31%',y:'7%',w:'520px',h:'390px'},
+  password:{title:'PASSWORD ANALYSIS LAB // SIMULATION',x:'60%',y:'8%',w:'360px',h:'315px'},
+  gps:{title:'GPS TRACKER // FICTIONAL DEVICE',x:'10%',y:'55%',w:'390px',h:'250px'},
+  cctv:{title:'CCTV SURVEILLANCE // FICTIONAL FEEDS',x:'36%',y:'58%',w:'470px',h:'260px'},
+  tools:{title:'CYBER TOOLBOX // DEMO MODULES',x:'69%',y:'48%',w:'330px',h:'310px'},
+  missions:{title:'MISSION CONTROL // TRAINING OPS',x:'5%',y:'22%',w:'330px',h:'280px'},
+  code:{title:'AUTOMATED CODE CONSOLE // GENERATED DEMO',x:'50%',y:'26%',w:'430px',h:'250px'}
+ };
+ function frame(id,title,x,y,w,h,body){const el=document.createElement('div');el.className='ec-win';el.id='ecw-'+id;el.style.cssText+=`left:${x};top:${y};width:${w};height:${h};z-index:${++z}`;el.innerHTML=`<div class="ec-title"><b>${title}</b><div class="ec-controls"><button onclick="ecMin('${id}')">—</button><button onclick="ecMax('${id}')">□</button><button onclick="ecClose('${id}')">×</button></div></div><div class="ec-body">${body}</div>`;wins.appendChild(el);drag(el);return el}
+ function drag(el){const bar=el.querySelector('.ec-title');let sx,sy,ox,oy,down=false;bar.addEventListener('mousedown',e=>{if(e.target.tagName==='BUTTON')return;down=true;sx=e.clientX;sy=e.clientY;ox=el.offsetLeft;oy=el.offsetTop;el.style.zIndex=++z});window.addEventListener('mousemove',e=>{if(!down)return;el.style.left=Math.max(0,ox+e.clientX-sx)+'px';el.style.top=Math.max(54,oy+e.clientY-sy)+'px'});window.addEventListener('mouseup',()=>down=false)}
+ function body(id){
+  if(id==='terminal')return `<div class="ec-terminal" id="ecTerm">EDITH CYBER SIMULATION LAB\nType: help, scan, trace, matrix, status, clear\n\n</div><div style="display:flex;gap:6px;margin-top:6px"><input class="ec-input" id="ecCmd" placeholder="simulation command" style="flex:1" onkeydown="if(event.key==='Enter')ecCommand()"><button class="ec-btn" onclick="ecCommand()">RUN</button></div>`;
+  if(id==='network')return `<div class="ec-mapwrap" id="ecMap"><div class="ec-world"></div>${Array.from({length:13},(_,i)=>`<i class="ec-node ${i%4===0?'r':''}" style="left:${12+(i*31)%78}%;top:${14+(i*47)%70}%"></i>`).join('')}</div>`;
+  if(id==='password')return `<div style="font-size:11px;color:#8db9c2;margin-bottom:8px">FICTIONAL TRAINING TARGET — no real credentials are accessed.</div><div style="display:grid;gap:7px"><input class="ec-input" id="ecUser" placeholder="Fake username (e.g. demo_user)"><input class="ec-input" id="ecTargetPw" placeholder="Optional fake target password"><button class="ec-btn" onclick="ecCrack()">▶ START SIMULATED CRACK</button></div><pre id="ecCrackOut" class="ec-terminal" style="height:150px;margin-top:8px">READY...</pre>`;
+  if(id==='gps')return `<div class="ec-stat">DEVICE <strong id="ecGpsDevice">DEMO-UNIT-07</strong></div><div class="ec-stat">STATUS <strong style="color:#43ff9a">TRACKING SIMULATION</strong></div><div class="ec-stat">LAT/LON <strong id="ecGps">28.6139 N / 77.2090 E</strong></div><div style="height:85px;margin-top:8px;border:1px solid #2ce0ff44;position:relative;background:repeating-linear-gradient(45deg,#04131b 0 12px,#061b25 13px 14px)"><div style="position:absolute;left:55%;top:43%;font-size:22px;animation:ecPulse 1s infinite alternate">📍</div></div>`;
+  if(id==='cctv')return `<div class="ec-cctv">${['Lobby','Parking','Server Room','Operations'].map((n,i)=>`<div class="ec-feed"><label>CAM ${i+1} • ${n} • <span class="rec">● REC</span></label><div class="person" style="animation-delay:${i*-1.5}s"></div><div style="position:absolute;left:${15+i*17}%;bottom:8px;width:50px;height:28px;border:2px solid #142b30"></div><time id="ect${i}"></time></div>`).join('')}</div>`;
+  if(id==='tools')return `<div class="ec-grid">${['Port Map (Demo)','Firewall Monitor','Packet Visualizer','Hash Generator','System Monitor','Encoding Lab','Trace Simulator','Log Analyzer','Matrix Stream','Code Generator'].map((x,i)=>`<button class="ec-btn" onclick="ecTool('${x}')">${x}</button>`).join('')}</div><div id="ecToolOut" class="ec-terminal" style="height:170px;margin-top:8px">Select a demo tool...</div>`;
+  if(id==='missions')return `<div class="mission"><b>01 • TRACE THE GHOST NODE</b><br>Follow the fictional route across the world map.</div><div class="mission"><b>02 • SECURE THE DEMO SERVER</b><br>Analyze the simulated firewall event log.</div><div class="mission"><b>03 • RECOVER THE TRAINING KEY</b><br>Use the password-analysis simulation.</div><div class="mission"><b>04 • WATCH CAM GRID</b><br>Identify the moving training markers.</div><button class="ec-btn" onclick="ecNewMission()">NEW RANDOM MISSION</button>`;
+  if(id==='code')return `<pre id="ecCode" class="ec-terminal">Starting automated code stream...</pre>`;
+ }
+ function open(id){if(document.getElementById('ecw-'+id)){document.getElementById('ecw-'+id).style.zIndex=++z;return}const d=defs[id];frame(id,d.title,d.x,d.y,d.w,d.h,body(id));if(id==='code')startCode();if(id==='cctv')startCctv();}
+ window.ecOpen=open;
+ window.ecClose=id=>{const e=document.getElementById('ecw-'+id);if(e)e.remove()};window.ecMin=id=>{const e=document.getElementById('ecw-'+id);if(e)e.style.display=e.style.display==='none'?'block':'none'};window.ecMax=id=>{const e=document.getElementById('ecw-'+id);if(!e)return;if(e.dataset.max==='1'){Object.assign(e.style,{left:e.dataset.l,top:e.dataset.t,width:e.dataset.w,height:e.dataset.h});e.dataset.max='0'}else{e.dataset.l=e.style.left;e.dataset.t=e.style.top;e.dataset.w=e.style.width;e.dataset.h=e.style.height;Object.assign(e.style,{left:'80px',top:'60px',width:'calc(100% - 100px)',height:'calc(100% - 110px)'});e.dataset.max='1'}e.style.zIndex=++z};
+ window.ecCommand=()=>{const i=document.getElementById('ecCmd'),o=document.getElementById('ecTerm');if(!i||!o)return;const c=i.value.trim().toLowerCase();i.value='';if(!c)return;o.textContent+=`> ${c}\n`;const r={help:['Commands: scan | trace | matrix | status | clear'],scan:['[SIM] Scanning fictional nodes...','Node 01 ONLINE','Node 02 ONLINE','No real hosts contacted.'],trace:['[SIM] Routing through demo gateways...','Hop 01 DEMO-ROUTER','Hop 02 DEMO-GATEWAY','Trace complete.'],matrix:['[SIM] Matrix stream enabled.','01001010 01000001 01010010 01010110','Visual stream active.'],status:['EDITH STATUS: ONLINE','Network: SIMULATED','Credentials: DISABLED','Tracking: FICTIONAL'],clear:['']};(r[c]||['Unknown simulation command. Type help.']).forEach(x=>o.textContent+=x+'\n');o.scrollTop=o.scrollHeight};
+ window.ecCrack=()=>{const u=(document.getElementById('ecUser')?.value||'demo_user').trim()||'demo_user',target=document.getElementById('ecTargetPw')?.value.trim()||'demo-key';const o=document.getElementById('ecCrackOut');let n=0;const candidates=['admin123','qwerty-demo','winter2026','edith-demo','jarvis-demo',''+target];o.textContent=`SIMULATION TARGET: ${u}\nNo real account contacted.\n`;const t=setInterval(()=>{o.textContent+=`[${++n}] trying ${candidates[n-1]||'demo-candidate-'+n} ... ${n===candidates.length?'MATCH (FICTIONAL)':'failed'}\n`;if(n>=candidates.length){clearInterval(t);o.textContent+='\nDEMO PASSWORD FOUND: '+target+'\nRESULT: SIMULATION ONLY';}},240)};
+ window.ecTool=x=>{const o=document.getElementById('ecToolOut');if(o)o.textContent='[SIMULATION] '+x+'\nInitializing visual module...\nGenerating fictional data...\nNo real systems contacted.\nModule ready.'};
+ window.ecNewMission=()=>{const o=document.querySelector('#ecw-missions .ec-body');if(o)o.innerHTML=body('missions').replace('01 • TRACE THE GHOST NODE','NEW • IDENTIFY THE PHANTOM RELAY').replace('02 • SECURE THE DEMO SERVER','BONUS • STABILIZE THE VIRTUAL GRID')};
+ function startCode(){const o=document.getElementById('ecCode');if(!o)return;const lines=['const edith = { mode: "SIMULATION", status: "ONLINE" };','for (const node of virtualNetwork) {','  renderNode(node);','  animateRoute(node.route);','}','// generating fictional telemetry...','const mission = pickRandomMission();','console.log("EDITH :: visual stream active");'];let i=0;const t=setInterval(()=>{if(!document.getElementById('ecCode')){clearInterval(t);return}o.textContent+=lines[i++%lines.length]+'\n';o.scrollTop=o.scrollHeight},260)}
+ function startCctv(){setInterval(()=>{for(let i=0;i<4;i++){const e=document.getElementById('ect'+i);if(e)e.textContent=new Date().toLocaleTimeString('en-IN')}},1000)}
+ window.ecFullscreen=()=>{const e=root;if(!document.fullscreenElement)e.requestFullscreen?.();else document.exitFullscreen?.()};window.closeEdithCyber=()=>{root.style.display='none';wins.innerHTML=''};
+ window.openEdithCyber=()=>{root.style.display='block';['network','terminal','password','gps','cctv','tools','missions','code'].forEach(open);};
+ setInterval(()=>{const e=document.getElementById('ecClock');if(e)e.textContent=new Date().toLocaleString('en-IN')},1000);
+ // Central voice bridge: supports BAT/localhost and direct HTML equally.
+ const previous=window.respond;
+ window.respond=function(text){const t=(text||'').toLowerCase().trim();
+   if(/^((open|start|launch)\s+)?(hacking|hacker|cyber|cyber simulation|edith cyber|geek prank)/.test(t)){openEdithCyber();return}
+   if(t.includes('close hacking')||t.includes('exit hacking')||t.includes('close cyber')||t.includes('exit cyber')){closeEdithCyber();return}
+   const appMap={'youtube':'https://www.youtube.com/','instagram':'https://www.instagram.com/','facebook':'https://www.facebook.com/','whatsapp':'https://web.whatsapp.com/','gmail':'https://mail.google.com/','spotify':'https://open.spotify.com/','netflix':'https://www.netflix.com/','telegram':'https://web.telegram.org/','google maps':'https://maps.google.com/','google drive':'https://drive.google.com/','google calendar':'https://calendar.google.com/','chatgpt':'https://chatgpt.com/'};
+   const m=t.match(/^(?:open|launch|start)\s+(.+)$/);if(m){const k=m[1].replace(/^the\s+/,'');if(appMap[k]){const w=window.open(appMap[k],'_blank','noopener');if(w){w.focus?.()}else{alert('Please allow pop-ups for JARVIS to open '+k)}return}}
+   if(t.startsWith('close all apps')){alert('JARVIS: close-all requested. Browser security may require manually closing tabs/windows opened outside this page.');return}
+   return previous?previous(text):undefined;
+ };
+})();
+</script>
+<!-- EDITH CYBER V3 END -->
